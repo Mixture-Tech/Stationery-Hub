@@ -13,3 +13,114 @@
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
 }
+
+/* Custom colors for Stationery-Hub */
+:root {
+  --soft-gray: #E8EFF5;  /* Màu bổ sung */
+  --mint-green: #D1F8EF;
+  --light-blue: #A1E3F9;
+  --medium-blue: #578FCA;
+  --dark-blue: #3674B5;
+  --navy-blue: #1B4B82;  /* Màu tối hơn */
+}
+
+@layer utilities {
+  /* Background colors */
+  .bg-mint {
+    background-color: var(--mint-green);
+  }
+  .bg-light-blue {
+    background-color: var(--light-blue);
+  }
+  .bg-medium-blue {
+    background-color: var(--medium-blue);
+  }
+  .bg-dark-blue {
+    background-color: var(--dark-blue);
+  }
+  .bg-navy {
+    background-color: var(--navy-blue);
+  }
+  .bg-soft-gray {
+    background-color: var(--soft-gray);
+  }
+  
+  /* Text colors */
+  .text-mint {
+    color: var(--mint-green);
+  }
+  .text-light-blue {
+    color: var(--light-blue);
+  }
+  .text-medium-blue {
+    color: var(--medium-blue);
+  }
+  .text-dark-blue {
+    color: var(--dark-blue);
+  }
+  .text-navy {
+    color: var(--navy-blue);
+  }
+  .text-soft-gray {
+    color: var(--soft-gray);
+  }
+  
+  /* Border colors */
+  .border-mint {
+    border-color: var(--mint-green);
+  }
+  .border-light-blue {
+    border-color: var(--light-blue);
+  }
+  .border-medium-blue {
+    border-color: var(--medium-blue);
+  }
+  .border-dark-blue {
+    border-color: var(--dark-blue);
+  }
+  .border-navy {
+    border-color: var(--navy-blue);
+  }
+  .border-soft-gray {
+    border-color: var(--soft-gray);
+  }
+
+  /* Hover versions */
+  .hover\:bg-mint:hover {
+    background-color: var(--mint-green);
+  }
+  .hover\:bg-light-blue:hover {
+    background-color: var(--light-blue);
+  }
+  .hover\:bg-medium-blue:hover {
+    background-color: var(--medium-blue);
+  }
+  .hover\:bg-dark-blue:hover {
+    background-color: var(--dark-blue);
+  }
+  .hover\:bg-navy:hover {
+    background-color: var(--navy-blue);
+  }
+  .hover\:bg-soft-gray:hover {
+    background-color: var(--soft-gray);
+  }
+  
+  .hover\:text-mint:hover {
+    color: var(--mint-green);
+  }
+  .hover\:text-light-blue:hover {
+    color: var(--light-blue);
+  }
+  .hover\:text-medium-blue:hover {
+    color: var(--medium-blue);
+  }
+  .hover\:text-dark-blue:hover {
+    color: var(--dark-blue);
+  }
+  .hover\:text-navy:hover {
+    color: var(--navy-blue);
+  }
+  .hover\:text-soft-gray:hover {
+    color: var(--soft-gray);
+  }
+}
