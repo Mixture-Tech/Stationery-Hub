@@ -1,13 +1,103 @@
 <div class="bg-navy">
-  <div class="py-2 px-6 w-4/5 mx-auto">
+  <div class="py-2 w-4/5 mx-auto">
     <div class="flex justify-between">
       <div class="flex items-center">
         <img src="{{ Vite::asset('resources/images/logo/MIXTURE-TECH.png') }}" alt="Market Logo" class="h-10 w-48">
       </div>
 
       <div class="ml-6 flex flex-1 gap-x-3">
+        <div class="relative group">
         <div class="flex cursor-pointer select-none items-center gap-x-2 rounded-md py-2 px-4 text-soft-gray hover:bg-medium-blue text-soft-gray">
           <x-icon name="menu-grid" class="h-5 w-5" />
+        </div>
+          
+          <!-- Dropdown menu that appears on hover -->
+          <div class="absolute top-full z-50 hidden w-[79vw] mx-[-215px] bg-white shadow-lg rounded-b-2xl group-hover:block">
+              <div class="grid grid-cols-4 gap-4 p-4">
+              <!-- Column 2: VĂN HỌC -->
+              <div>
+                <h3 class="font-bold text-black mb-3">VĂN HỌC</h3>
+                <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tiểu Thuyết</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Truyện Ngắn - Tản Văn</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Light Novel</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Ngôn Tình</a></li>
+                  <li class="mb-1"><a href="#" class="text-dark-blue hover:text-medium-blue">Xem tất cả</a></li>
+                </ul>
+
+                <h3 class="font-bold text-black mb-3 mt-4">SÁCH THIẾU NHI</h3>
+                <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Manga - Comic</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Kiến Thức Bách Khoa</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Sách Tranh Kỹ Năng Sống</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Vừa Học - Vừa Chơi</a></li>
+                  <li class="mb-1"><a href="#" class="text-dark-blue hover:text-medium-blue">Xem tất cả</a></li>
+                </ul>
+              </div>
+
+              <!-- Column 3: KINH TẾ & TÂM LÝ -->
+              <div>
+                <h3 class="font-bold text-black mb-3">KINH TẾ</h3>
+                <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Nhân Vật - Bài Học Kinh Doanh</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Quản Trị - Lãnh Đạo</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Marketing - Bán Hàng</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Phân Tích Kinh Tế</a></li>
+                  <li class="mb-1"><a href="#" class="text-dark-blue hover:text-medium-blue">Xem tất cả</a></li>
+                </ul>
+
+                <h3 class="font-bold text-black mb-3 mt-4">TIỂU SỬ - HỒI KÝ</h3>
+                <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Câu Chuyện Cuộc Đời</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Chính Trị</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Kinh Tế</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Nghệ Thuật - Giải Trí</a></li>
+                  <li class="mb-1"><a href="#" class="text-dark-blue hover:text-medium-blue">Xem tất cả</a></li>
+                </ul>
+              </div>
+
+              <!-- Column 4: TÂM LÝ & NGOẠI NGỮ -->
+              <div>
+                <h3 class="font-bold text-black mb-3">TÂM LÝ - KỸ NĂNG SỐNG</h3>
+                <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Kỹ Năng Sống</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Rèn Luyện Nhân Cách</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tâm Lý</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Sách Cho Tuổi Mới Lớn</a></li>
+                  <li class="mb-1"><a href="#" class="text-dark-blue hover:text-medium-blue">Xem tất cả</a></li>
+                </ul>
+
+                <h3 class="font-bold text-black mb-3 mt-4">SÁCH HỌC NGOẠI NGỮ</h3>
+                <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tiếng Anh</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tiếng Nhật</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tiếng Hoa</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tiếng Hàn</a></li>
+                  <li class="mb-1"><a href="#" class="text-dark-blue hover:text-medium-blue">Xem tất cả</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 class="font-bold text-black mb-3">TÂM LÝ - KỸ NĂNG SỐNG</h3>
+                <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Kỹ Năng Sống</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Rèn Luyện Nhân Cách</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tâm Lý</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Sách Cho Tuổi Mới Lớn</a></li>
+                  <li class="mb-1"><a href="#" class="text-dark-blue hover:text-medium-blue">Xem tất cả</a></li>
+                </ul>
+
+                <h3 class="font-bold text-black mb-3 mt-4">SÁCH HỌC NGOẠI NGỮ</h3>
+                <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tiếng Anh</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tiếng Nhật</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tiếng Hoa</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-700 hover:text-navy">Tiếng Hàn</a></li>
+                  <li class="mb-1"><a href="#" class="text-dark-blue hover:text-medium-blue">Xem tất cả</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="relative w-full">

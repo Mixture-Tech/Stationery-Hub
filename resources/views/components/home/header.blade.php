@@ -1,4 +1,5 @@
-<!-- Slider Section -->
+<div>
+  <!-- Slider Section -->
 <div class="relative w-full">
   <div class="w-4/5 mx-auto">
     <div class="flex h-full">
@@ -38,4 +39,5 @@
       image="resources/images/product-banner/product_banner_6.jpg"
       title="Máy tính chính hãng" />
   </div>
+</div>
 </div>
