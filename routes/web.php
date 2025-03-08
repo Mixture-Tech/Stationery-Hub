@@ -17,3 +17,11 @@ Route::get('/san-pham/chi-tiet-san-pham', function () {
 Route::get('/gio-hang', function () {
     return view('/cart/index');
 });
+
+Route::get('/thanh-toan', function() {
+    return view('/payment/index');
+});
+
+Route::get('/thanh-toan-thanh-cong', function () {
+    return view('/payment/success');
+});
