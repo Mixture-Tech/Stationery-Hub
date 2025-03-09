@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ Hàng - Fahasa.com</title>
-    @vite('resources/css/app.css')
-</head>
-<body class="bg-gray-100">
-    @include('components.global.navbar')
-
+<x-app-layout>
     <div class="container w-4/5 mx-auto py-6 px-4">
         <div class="bg-white rounded-lg shadow-md">
             <div class="p-4 border-b-4 border-gray-200">
@@ -72,12 +62,9 @@
                     </div>
                     <x-product.product-button variant="primary" class="w-full">
                         Tiến hành thanh toán
-                    </x-home.product.product-button>
+                    </x-product.product-button>
                 </div>
             </div>
         </div>
     </div>
-
-    @include('components.global.footer')
-</body>
-</html>
+</x-app-layout>

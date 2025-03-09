@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tâm Lý Học Về Tiền - Fahasa.com</title>
-    @vite('resources/css/app.css')
-</head>
-<body class="bg-soft-gray">
-    @include('components.global.navbar')
-
+<x-app-layout>
     <div class="container w-4/5 mx-auto py-6 px-4">
         <!-- Breadcrumbs -->
         <div class="mb-4 text-sm">
@@ -105,7 +95,4 @@
             </div>
         </div>
     </div>
-
-    @include('components.global.footer')
-</body>
-</html>
+</x-app-layout>
