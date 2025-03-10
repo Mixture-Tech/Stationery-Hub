@@ -12,7 +12,7 @@
 
 <div class="bg-white rounded shadow-sm overflow-hidden hover:drop-shadow-xl">
     <div class="relative cursor-pointer">
-        <img src="{{ Vite::asset($image) }}" alt="{{ $name }}" class="w-full h-52 object-cover">
+        <img src="{{ Vite::asset($image) }}" alt="{{ $name }}" class="w-full h-52">
     </div>
     <div class="p-3">
         <h3 class="text-sm font-medium h-10 overflow-hidden line-clamp-2">{{ $name }}</h3>

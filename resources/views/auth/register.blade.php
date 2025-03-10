@@ -1,42 +1,51 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký - Stationery Hub</title>
-    @vite('resources/css/app.css')
-</head>
-<body class="bg-soft-gray flex items-center justify-center min-h-screen">
+<x-guest-layout>
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
 
-    <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
-        <h2 class="text-3xl font-bold text-navy text-center mb-6">Đăng ký tài khoản</h2>
+        <!-- Name -->
+        <div>
+            <x-input-label for="name" :value="__('Họ và tên')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
 
-        <form action="{{ route('register') }}" method="POST" class="space-y-4">
-            @csrf
+        <!-- Email Address -->
+        <div class="mt-4">
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
 
-            <!-- Họ và tên -->
-            <x-auth.textfield id="name" name="name" label="Họ và tên" type="text" />
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Mật khẩu')" />
 
-            <!-- Email -->
-            <x-auth.textfield id="email" name="email" label="Email" type="email" />
+            <x-text-input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="new-password" />
 
-            <!-- Số điện thoại -->
-            <x-auth.textfield id="phone" name="phone" label="Số điện thoại" type="tel" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
 
-            <!-- Mật khẩu -->
-            <x-auth.textfield id="password" name="password" label="Mật khẩu" type="password" />
+        <!-- Confirm Password -->
+        <div class="mt-4">
+            <x-input-label for="password_confirmation" :value="__('Nhập lại mật khẩu')" />
 
-            <!-- Nút đăng ký -->
-            <x-auth.button text="Đăng ký" />
+            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                            type="password"
+                            name="password_confirmation" required autocomplete="new-password" />
 
-        </form>
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
 
-        <!-- Chuyển hướng đến trang đăng nhập -->
-        <p class="text-center text-gray-600 mt-4">
-            Đã có tài khoản? 
-            <a href="{{ route('login') }}" class="text-medium-blue hover:underline">Đăng nhập</a>
-        </p>
-    </div>
-
-</body>
-</html>
+        <div class="flex flex-col items-center justify-end mt-4">
+            <x-primary-button class="mb-4">
+                {{ __('Đăng ký') }}
+            </x-primary-button>
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                {{ __('Đã có tài khoản?') }}
+            </a>
+        </div>
+    </form>
+</x-guest-layout>

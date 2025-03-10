@@ -4,13 +4,13 @@
 @switch($name)
 
 @case('previous')
-<svg class="w-4 h-4 text-dark dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+<svg class="w-4 h-4 text-dark rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
 </svg>
 @break
 
 @case('next')
-<svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+<svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
 </svg>
 @break
@@ -121,6 +121,18 @@
 @case('thunder')
 <svg xmlns="http://www.w3.org/2000/svg" {{ $attributes }} viewBox="0 0 24 24" fill="currentColor">
     <path d="M17.6842 3.60279C18.2055 2.944 17.7132 2 16.8484 2H10.1317C9.75652 2 9.40996 2.19159 9.22321 2.50227L4.14052 10.9577C3.73978 11.6243 4.2439 12.4554 5.04904 12.4554H8.47764L5.24755 20.5203C4.78108 21.5406 6.04257 22.473 6.89092 21.735L20 9.33119H13.151L17.6842 3.60279Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+@break
+
+@case('chevron-down')
+<svg xmlns="http://www.w3.org/2000/svg" {{ $attributes }} viewBox="0 0 24 24" fill="currentColor">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z" fill="currentColor"></path>
+</svg>
+@break
+
+@case('trash')
+<svg xmlns="http://www.w3.org/2000/svg" {{ $attributes }} class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
 </svg>
 @break
 

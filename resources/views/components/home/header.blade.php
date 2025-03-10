@@ -1,6 +1,5 @@
-<div>
-  <!-- Slider Section -->
-<div class="relative w-full">
+<!-- Slider Section -->
+<div class="relative w-full mt-2">
   <div class="w-4/5 mx-auto">
     <div class="flex h-full">
       <div class="w-3/4">

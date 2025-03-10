@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -17,10 +19,18 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $primaryKey = 'id_user';
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'address',
+        'phone',
+        'hide',
+        'gender',
+        'id_role',
+        'avatar',
     ];
 
     /**
@@ -38,11 +48,23 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    public function role(): BelongsTo
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Role::class, 'id_role', 'id_role');
+    }
+    
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'id_user', 'id_user');
+    }
+    
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class, 'id_user', 'id_user');
     }
 }
