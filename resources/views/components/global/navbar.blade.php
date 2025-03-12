@@ -7,7 +7,7 @@
 
       <div class="ml-6 flex flex-1 gap-x-3">
         <div class="relative group">
-        <div class="flex cursor-pointer select-none items-center gap-x-2 rounded-md py-2 px-4 text-soft-gray hover:bg-medium-blue text-soft-gray">
+        <div class="flex cursor-pointer select-none items-center gap-x-2 rounded-md py-2 px-4 hover:bg-medium-blue text-soft-gray">
           <x-icon name="menu-grid" class="h-5 w-5" />
         </div>
           

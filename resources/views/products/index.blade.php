@@ -11,30 +11,20 @@
 
 
                     <div class="pl-3 space-y-2 cursor-pointer">
-                        <div class="font-medium">Sách Tiếng Việt</div>
-                        <div class="pl-2 space-y-2 ">
-                            <div class="text-sm hover:text-dark-blue">Thiếu nhi</div>
-                            <div class="text-sm hover:text-dark-blue">Thanh niên</div>
-                            <div class="text-sm hover:text-dark-blue">Người già</div>
-                        </div>
-                        <div class="font-medium">Sách Toán</div>
-                        <div class="pl-2 space-y-2 ">
-                            <div class="text-sm hover:text-dark-blue">Thiếu nhi</div>
-                            <div class="text-sm hover:text-dark-blue">Thanh niên</div>
-                            <div class="text-sm hover:text-dark-blue">Người già</div>
-                        </div>
-                        <div class="font-medium">Sách Tiếng Anh</div>
-                        <div class="pl-2 space-y-2 ">
-                            <div class="text-sm hover:text-dark-blue">Thiếu nhi</div>
-                            <div class="text-sm hover:text-dark-blue">Thanh niên</div>
-                            <div class="text-sm hover:text-dark-blue">Người già</div>
-                        </div>
-                        <div class="font-medium">Sách Ngữ Văn</div>
-                        <div class="pl-2 space-y-2 ">
-                            <div class="text-sm hover:text-dark-blue">Thiếu nhi</div>
-                            <div class="text-sm hover:text-dark-blue">Thanh niên</div>
-                            <div class="text-sm hover:text-dark-blue">Người già</div>
-                        </div>
+                        @foreach($categories as $mainCategory)
+                            @if($mainCategory->parent_id === null)
+                                <div class="font-medium">{{ $mainCategory->name }}</div>
+                                <div class="pl-2 space-y-2">
+                                    @foreach($categories->where('parent_id', $mainCategory->id_category) as $subCategory)
+                                        <div class="text-sm hover:text-dark-blue">
+                                            <a href="{{ route('products.index', ['category' => $subCategory->id_category]) }}">
+                                                {{ $subCategory->name }}
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
 
@@ -107,119 +97,23 @@
 
                 <!-- Products grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    <!-- Example product 1 -->
-                    <div class="relative">
-                        <x-product.product-card
-                            image="{{ ('resources/images/products/product_1.jpg') }}"
-                            name="Công Chúa Nhỏ - A Little Princess - Song Ngữ Việt-Anh"
-                            price="89100"
-                            originalPrice="99000"
-                            discountPercent="10"
-                            rating="4"
-                            soldCount="120" />
-                    </div>
-
-                    <!-- Example product 2 -->
-                    <div class="relative">
-                        <x-product.product-card
-                            image="{{ ('resources/images/products/product_2.jpg') }}"
-                            name="Tiệm Bánh Mì Của Iston"
-                            price="34200"
-                            originalPrice="38000"
-                            discountPercent="10"
-                            rating="5"
-                            soldCount="85" />
-                    </div>
-
-                    <!-- Example product 3 -->
-                    <div class="relative">
-                        <x-product.product-card
-                            image="{{ ('resources/images/products/product_3.jpg') }}"
-                            name="Iston Và Buổi Hòa Nhạc"
-                            price="34200"
-                            originalPrice="38000"
-                            discountPercent="10"
-                            rating="4"
-                            soldCount="62" />
-                    </div>
-
-                    <!-- Example product 4 -->
-                    <div class="relative">
-                        <x-product.product-card
-                            image="{{ ('resources/images/products/product_4.jpg') }}"
-                            name="Iston Và Cơn Gió Đầu Xuân"
-                            price="34200"
-                            originalPrice="38000"
-                            discountPercent="10"
-                            rating="5"
-                            soldCount="74" />
-                    </div>
-
-                    <!-- Add more products as needed -->
-                    <div class="relative">
-                        <x-product.product-card
-                            image="{{ ('resources/images/products/product_4.jpg') }}"
-                            name="Cùng Trẻ Lớn Lên - Rèn Luyện Lòng Dũng Cảm"
-                            price="34200"
-                            originalPrice="38000"
-                            discountPercent="10"
-                            rating="4"
-                            soldCount="59" />
-                    </div>
-
-                    <div class="relative">
-                        <x-product.product-card
-                            image="{{ ('resources/images/products/product_3.jpg') }}"
-                            name="Cùng Trẻ Lớn Lên - Rèn Luyện Tính Tự Giác"
-                            price="34200"
-                            originalPrice="38000"
-                            discountPercent="10"
-                            rating="4"
-                            soldCount="47" />
-                    </div>
-
-                    <div class="relative">
-                        <x-product.product-card
-                            image="{{ ('resources/images/products/product_1.jpg') }}"
-                            name="Cùng Trẻ Lớn Lên - Nâng Lương Tích Cực"
-                            price="34200"
-                            originalPrice="38000"
-                            discountPercent="10"
-                            rating="5"
-                            soldCount="82" />
-                    </div>
-
-                    <div class="relative">
-                        <x-product.product-card
-                            image="{{ ('resources/images/products/product_2.jpg') }}"
-                            name="Cùng Trẻ Lớn Lên - Không Dựa Dẫm"
-                            price="34200"
-                            originalPrice="38000"
-                            discountPercent="10"
-                            rating="4"
-                            soldCount="53" />
-                    </div>
+                    @foreach($products as $product)
+                        <div class="relative">
+                            <x-product.product-card
+                                image="{{ $product->image }}"
+                                name="{{ $product->name }}"
+                                price="{{ $product->price }}"
+                                originalPrice="{{ $product->price*$product->discount }}"
+                                discountPercent="{{ $product->discount }}"
+                                rating="{{ rand(1, 5) }}"
+                                soldCount="{{ $product->sold_count ?? rand(10, 100) }}" />
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- Pagination -->
                 <div class="mt-6 flex justify-center">
-                    <nav class="inline-flex rounded-md shadow-sm">
-                        <a href="#" class="px-3 py-1 rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
-                            «
-                        </a>
-                        <a href="#" class="px-3 py-1 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
-                            1
-                        </a>
-                        <a href="#" class="px-3 py-1 border border-gray-300 bg-dark-blue text-white">
-                            2
-                        </a>
-                        <a href="#" class="px-3 py-1 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
-                            3
-                        </a>
-                        <a href="#" class="px-3 py-1 rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
-                            »
-                        </a>
-                    </nav>
+                    {{ $products->withQueryString()->links() }}
                 </div>
             </div>
         </div>
