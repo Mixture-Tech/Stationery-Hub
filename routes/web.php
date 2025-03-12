@@ -20,9 +20,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/product/detail', function () {
-    return view('products.detail');
-});
+Route::get('/products/{id}', [ProductController::class, 'detail'])->name('products.detail');
 
 Route::get('/cart', function () {
     return view('cart.index');
