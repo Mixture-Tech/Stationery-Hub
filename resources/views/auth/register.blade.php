@@ -40,9 +40,9 @@
         </div>
 
         <div class="flex flex-col items-center justify-end mt-4">
-            <x-primary-button class="mb-4">
+            <x-auth.primary-button class="mb-4">
                 {{ __('Đăng ký') }}
-            </x-primary-button>
+            </x-auth.primary-button>
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Đã có tài khoản?') }}
             </a>

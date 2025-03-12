@@ -48,7 +48,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Lưu') }}</x-primary-button>
+            <x-auth.primary-button>{{ __('Lưu') }}</x-auth.primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p

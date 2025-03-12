@@ -33,9 +33,9 @@
         </div>
 
         <div class="flex items-center justify-center mt-4">
-            <x-primary-button>
+            <x-auth.primary-button>
                     {{ __('Đăng nhập') }}
-            </x-primary-button>
+            </x-auth.primary-button>
         </div>
 
         <div class="flex items-center justify-between mt-4">
