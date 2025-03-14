@@ -1,13 +1,7 @@
 <x-app-layout>
     <div class="container w-4/5 mx-auto py-6 px-4">
         <!-- Breadcrumbs -->
-        <div class="mb-4 text-sm">
-            <a href="{{ route('products.index') }}" class="text-black hover:text-medium-blue">TẤT CẢ SẢN PHẨM</a>
-            <span class="mx-2">›</span>
-            <a href="{{ route('products.index', ['category' => $product->category->id_category]) }}" class="text-black hover:text-medium-blue uppercase">{{ $product->category->name_category }}</a>
-            <span class="mx-2">›</span>
-            <span class="text-dark-blue uppercase">{{ $product->name }}</span>
-        </div>
+        <x-product.breadcrumb :items="$breadcrumbItems" />
 
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Product Image Gallery -->

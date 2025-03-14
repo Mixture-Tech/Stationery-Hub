@@ -3,11 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const priceCheckboxes = document.querySelectorAll('.price-checkbox');
     priceCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
-            // Bỏ chọn tất cả checkbox khác
-            priceCheckboxes.forEach(cb => {
-                if (cb !== this) cb.checked = false;
-            });
-            
+            // Không bỏ chọn các checkbox khác để cho phép chọn nhiều khoảng giá
             // Submit form
             document.getElementById('price-filter-form').submit();
         });
