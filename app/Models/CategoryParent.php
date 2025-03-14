@@ -25,4 +25,16 @@ class CategoryParent extends Model
     {
         return $this->hasMany(Category::class, 'id_parent', 'id_parent');
     }
+
+    public function products()
+    {
+        return $this->hasManyThrough(
+            Product::class,
+            Category::class,
+            'id_parent',
+            'id_category',
+            'id_parent',
+            'id_category'
+        );
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,13 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/product', function () {
-    return view('products.index');
-});
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/product/detail', function () {
-    return view('products.detail');
-});
+Route::get('/products/{id}', [ProductController::class, 'detail'])->name('products.detail');
 
 Route::get('/cart', function () {
     return view('cart.index');

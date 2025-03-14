@@ -7,14 +7,13 @@
 
       <div class="ml-6 flex flex-1 gap-x-3">
         <div class="relative group">
-        <div class="flex cursor-pointer select-none items-center gap-x-2 rounded-md py-2 px-4 text-soft-gray hover:bg-medium-blue text-soft-gray">
+        <div class="flex cursor-pointer select-none items-center gap-x-2 rounded-md py-2 px-4 hover:bg-medium-blue text-soft-gray">
           <x-icon name="menu-grid" class="h-5 w-5" />
         </div>
           
           <!-- Dropdown menu that appears on hover -->
-          <div class="absolute top-full z-50 hidden w-[79vw] mx-[-215px] bg-white shadow-lg rounded-b-2xl group-hover:block">
+          <!-- <div class="absolute top-full z-50 hidden w-[79vw] mx-[-215px] bg-white shadow-lg rounded-b-2xl group-hover:block">
               <div class="grid grid-cols-4 gap-4 p-4">
-              <!-- Column 2: VĂN HỌC -->
               <div>
                 <h3 class="font-bold text-black mb-3">VĂN HỌC</h3>
                 <ul>
@@ -35,7 +34,6 @@
                 </ul>
               </div>
 
-              <!-- Column 3: KINH TẾ & TÂM LÝ -->
               <div>
                 <h3 class="font-bold text-black mb-3">KINH TẾ</h3>
                 <ul>
@@ -56,7 +54,6 @@
                 </ul>
               </div>
 
-              <!-- Column 4: TÂM LÝ & NGOẠI NGỮ -->
               <div>
                 <h3 class="font-bold text-black mb-3">TÂM LÝ - KỸ NĂNG SỐNG</h3>
                 <ul>
@@ -97,7 +94,7 @@
                 </ul>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <div class="relative w-full">

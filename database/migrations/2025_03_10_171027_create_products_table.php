@@ -21,10 +21,10 @@ return new class extends Migration
             $table->text('detail')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->boolean('discount')->default(false);
+            $table->integer('discount')->default(0);
             $table->string('brand')->nullable();
             $table->string('link')->nullable();
-            $table->boolean('hide')->default(false);
+            $table->boolean('hide')->default(0);
             $table->timestamps();
 
             $table->foreign('id_category')->references('id_category')->on('categories')->onDelete('cascade');
