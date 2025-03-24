@@ -15,6 +15,7 @@ class CategoryParent extends Model
     protected $fillable = [
         'name_parent',
         'link',
+        'hide',
     ];
     
     protected $hidden = [

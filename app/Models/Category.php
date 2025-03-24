@@ -17,6 +17,7 @@ class Category extends Model
         'name_category',
         'link',
         'id_parent',
+        'hide',
     ];
     
     protected $hidden = [
