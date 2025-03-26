@@ -59,13 +59,19 @@
 
                 <div class="mb-4">
                     <h3 class="font-semibold mb-2">Số lượng</h3>
-                    <x-product.quantity-button />
+                    <x-product.quantity-button :value="1" :max="$product->nums" :id="'quantity-product-' . $product->id_product" />
                 </div>
 
+                <!-- Trong phần nút "Thêm vào giỏ hàng" -->
                 <div class="flex space-x-4">
-                    <x-product.product-button variant="secondary">
-                        Thêm vào giỏ hàng
-                    </x-product.product-button>
+                    <form action="{{ route('cart.add') }}" method="POST" id="add-to-cart-form">
+                        @csrf
+                        <input type="hidden" name="id_product" value="{{ $product->id_product }}">
+                        <input type="hidden" name="quantity" id="quantity-hidden">
+                        <x-product.product-button variant="secondary" type="submit">
+                            Thêm vào giỏ hàng
+                        </x-product.product-button>
+                    </form>
                     <x-product.product-button variant="primary">
                         Mua ngay
                     </x-product.product-button>
@@ -94,3 +100,13 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.getElementById('add-to-cart-form').addEventListener('submit', function(e) {
+        const quantityInput = document.getElementById('quantity-product-{{ $product->id_product }}');
+        const quantityHidden = document.getElementById('quantity-hidden');
+        if (quantityInput) {
+            quantityHidden.value = quantityInput.value;
+        }
+    });
+</script>

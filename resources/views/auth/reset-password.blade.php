@@ -31,9 +31,9 @@
         </div>
 
         <div class="flex items-center justify-center mt-4">
-            <x-primary-button>
+            <x-auth.primary-button>
                 {{ __('Đặt lại mật khẩu') }}
-            </x-primary-button>
+            </x-auth.primary-button>
         </div>
     </form>
 </x-guest-layout>

@@ -1,16 +1,18 @@
-<!-- resources/views/components/product/quantity-button.blade.php -->
 <div class="flex items-center">
     <button 
-        id="decrease-qty" 
+        type="button" 
+        id="decrease-qty-{{ $id }}" 
         class="bg-gray-200 cursor-pointer px-3 py-1 border border-r-0 border-gray-400 rounded-l hover:bg-light-blue"
     >
         -
     </button>
     <input 
         type="number" 
-        id="quantity" 
-        value="1" 
+        id="{{ $id }}" 
+        name="{{ $name ?? 'quantity' }}" 
+        value="{{ $value ?? 1 }}" 
         min="1" 
+        max="{{ $max ?? 100 }}" 
         class="w-12 text-center border-t border-b border-gray-400 py-1 focus:outline-none 
             appearance-none 
             [-moz-appearance:_textfield] 
@@ -20,7 +22,8 @@
             [&::-webkit-inner-spin-button]:appearance-none"
     >
     <button 
-        id="increase-qty" 
+        type="button" 
+        id="increase-qty-{{ $id }}" 
         class="bg-gray-200 cursor-pointer px-3 py-1 border border-l-0 border-gray-400 rounded-r hover:bg-light-blue"
     >
         +
@@ -29,20 +32,24 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const decreaseBtn = document.getElementById('decrease-qty');
-    const increaseBtn = document.getElementById('increase-qty');
-    const quantityInput = document.getElementById('quantity');
+    const decreaseBtn = document.getElementById('decrease-qty-{{ $id }}');
+    const increaseBtn = document.getElementById('increase-qty-{{ $id }}');
+    const quantityInput = document.getElementById('{{ $id }}');
 
-    decreaseBtn.addEventListener('click', function() {
+    decreaseBtn.addEventListener('click', function(e) {
+        e.preventDefault(); // Ngăn reload trang
         let currentValue = parseInt(quantityInput.value);
-        if (currentValue > 1) {
+        if (currentValue > parseInt(quantityInput.min)) {
             quantityInput.value = currentValue - 1;
         }
     });
 
-    increaseBtn.addEventListener('click', function() {
+    increaseBtn.addEventListener('click', function(e) {
+        e.preventDefault(); // Ngăn reload trang
         let currentValue = parseInt(quantityInput.value);
-        quantityInput.value = currentValue + 1;
+        if (currentValue < parseInt(quantityInput.max)) {
+            quantityInput.value = currentValue + 1;
+        }
     });
 });
 </script>

@@ -11,6 +11,13 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Toastify CSS and JS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -33,5 +40,46 @@
             </main>
             @include('components.global.footer')
         </div>
+
+        <!-- Toastify Notifications -->
+        @if(session('success'))
+            <script>
+                $(document).ready(function() {
+                    Toastify({
+                        text: '{{ session('success') }}',
+                        duration: 2000,
+                        close: true,
+                        gravity: "top", // `top` hoặc `bottom`
+                        position: "right", // `left`, `center` hoặc `right`
+                        stopOnFocus: true, // Ngăn chặn đóng toast khi hover
+                        style: {
+                            background: "#D1F8EF", /* mint-green */
+                            color: "#1B4B82", /* navy-blue */
+                            border: "1px solid #1B4B82"
+                        },
+                        onClick: function(){} // Callback sau khi click
+                    }).showToast();
+                });
+            </script>
+        @endif
+
+        @if(session('error'))
+            <script>
+                $(document).ready(function() {
+                    Toastify({
+                        text: '{{ session('error') }}',
+                        duration: 2000,
+                        close: true,
+                        gravity: "top", // `top` hoặc `bottom`
+                        position: "right", // `left`, `center` hoặc `right`
+                        stopOnFocus: true, // Ngăn chặn đóng toast khi hover
+                        style: {
+                            background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                        },
+                        onClick: function(){} // Callback sau khi click
+                    }).showToast();
+                });
+            </script>
+        @endif
     </body>
 </html>

@@ -113,11 +113,13 @@
 
         <div class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-medium-blue text-soft-gray">
           <div class="relative">
-            <x-icon name="cart" class="h-5 w-5 text-soft-gray" />
-            <span class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-soft-gray">3</span>
+              <x-icon name="cart" class="h-5 w-5 text-soft-gray" />
+              <span class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-soft-gray">
+                  {{ App\Http\Controllers\CartController::cartItemCount() }}
+              </span>
           </div>
-          <span class="text-sm font-medium text-soft-gray">Giỏ hàng</span>
-        </div>
+          <a href="{{ route('cart.index') }}" class="text-sm font-medium text-soft-gray">Giỏ hàng</a>
+      </div>
 
         <div class="relative ml-2">
           @auth
