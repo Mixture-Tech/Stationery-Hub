@@ -2,7 +2,7 @@
     <div class="container w-4/5 mx-auto py-6 px-4">
         <div class="bg-white rounded-lg shadow-md">
 
-        <div class="flex flex-col">
+            <div class="flex flex-col">
                 <!-- Phần Địa chỉ giao hàng -->
                 <div class="w-full p-4">
                     <h2 class="font-bold mb-2">ĐỊA CHỈ GIAO HÀNG</h2>
@@ -30,7 +30,7 @@
                                 <select id="province" name="id_province" class="w-full mt-1 p-2 border rounded" required>
                                     <option value="">Chọn tỉnh/thành phố</option>
                                     @foreach($provinces as $province)
-                                        <option value="{{ $province->id_province }}">{{ $province->name }}</option>
+                                    <option value="{{ $province->id_province }}">{{ $province->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,10 +55,12 @@
                             <h2 class="font-bold mb-4">PHƯƠNG THỨC THANH TOÁN</h2>
                             <label class="flex items-center mb-2">
                                 <input type="radio" name="payment_methods" value="momo" class="mr-2">
+                                <img src="https://via.placeholder.com/50x20?text=MoMo" alt="MoMo" class="mr-2">
                                 Ví MoMo
                             </label>
                             <label class="flex items-center mb-2">
                                 <input type="radio" name="payment_methods" value="COD" class="mr-2">
+                                <img src="https://via.placeholder.com/50x20?text=COD" alt="COD" class="mr-2">
                                 Thanh toán bằng tiền mặt khi nhận hàng
                             </label>
                         </div>
@@ -68,16 +70,16 @@
                             <h3 class="font-bold mb-4">KIỂM TRA LẠI ĐƠN HÀNG</h3>
                             <div class="border-b pb-2 mb-2 text-sm">
                                 @foreach($items as $item)
-                                    <div class="flex items-center mb-2">
-                                        <img src="{{ $item['product']->image }}" alt="{{ $item['product']->name }}" class="w-12 h-12 mr-4">
-                                        <div class="flex-1">
-                                            <p>{{ $item['product']->name }}</p>
-                                        </div>
-                                        <!-- <p>{{ number_format($item['total_price'], 3, '.', '.') }} đ</p> -->
-                                        <p class="ml-4">{{ number_format($item['discount_price'], 3, '.', '.') }} đ</p>
-                                        <p class="ml-4">x {{ $item['quantity'] }}</p>
-                                        <p class="ml-4 font-bold">{{ number_format($item['total_price'], 3, '.', '.') }} đ</p>
+                                <div class="flex items-center mb-2">
+                                    <img src="{{ $item['product']->image }}" alt="{{ $item['product']->name }}" class="w-12 h-12 mr-4">
+                                    <div class="flex-1">
+                                        <p>{{ $item['product']->name }}</p>
                                     </div>
+                                    <!-- <p>{{ number_format($item['total_price'], 3, '.', '.') }} đ</p> -->
+                                    <p class="ml-4">{{ number_format($item['discount_price'], 3, '.', '.') }} đ</p>
+                                    <p class="ml-4">x {{ $item['quantity'] }}</p>
+                                    <p class="ml-4 font-bold">{{ number_format($item['total_price'], 3, '.', '.') }} đ</p>
+                                </div>
                                 @endforeach
                             </div>
                             <p class="mb-2">Tạm tính <span class="float-right" id="subtotal">{{ number_format($subtotal, 3, '.', '.') }} đ</span></p>
@@ -94,9 +96,9 @@
 
                         <!-- Hidden inputs cho items -->
                         @foreach($items as $index => $item)
-                            <input type="hidden" name="items[{{$index}}][id_product]" value="{{ $item['product']->id_product }}">
-                            <input type="hidden" name="items[{{$index}}][quantity]" value="{{ $item['quantity'] }}">
-                            <input type="hidden" name="items[{{$index}}][total_price]" value="{{ $item['total_price'] }}">
+                        <input type="hidden" name="items[{{$index}}][id_product]" value="{{ $item['product']->id_product }}">
+                        <input type="hidden" name="items[{{$index}}][quantity]" value="{{ $item['quantity'] }}">
+                        <input type="hidden" name="items[{{$index}}][total_price]" value="{{ $item['total_price'] }}">
                         @endforeach
                     </form>
                 </div>
@@ -120,7 +122,11 @@
 
     // Cập nhật tổng tiền
     function updateTotal(shippingFee) {
-        const subtotal = parseFloat({{ $subtotal }}); // Đảm bảo là số
+        const subtotal = parseFloat({
+            {
+                $subtotal
+            }
+        }); // Đảm bảo là số
         shippingFee = parseFloat(shippingFee || 0); // Đảm bảo shippingFee là số
         const total = subtotal + shippingFee;
         document.getElementById('subtotal').textContent = formatCurrency(subtotal);

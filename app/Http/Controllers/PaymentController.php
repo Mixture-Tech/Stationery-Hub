@@ -20,16 +20,21 @@ class PaymentController extends Controller
         $quantity = $request->input('quantity', 1); // Mặc định là 1 nếu không có số lượng
 
         $product = Product::findOrFail($id_product);
-        $total_price = $product->price * $quantity;
+        $total_price = $product->discount_price * $quantity;
 
         // Truyền dữ liệu sang trang thanh toán
         $items = [
             [
                 'product' => $product,
+                'discount_price' => $product->discount_price,
                 'quantity' => $quantity,
                 'total_price' => $total_price,
             ]
         ];
+        // Kiểm tra số lượng sản phẩm có đủ không
+        if ($product->nums < $quantity) {
+            return redirect()->back()->with('error', 'Số lượng yêu cầu cho ' . $quantity . ' không có sẵn!');
+        }
 
         $provinces = Province::all();
         $districts = District::all();
