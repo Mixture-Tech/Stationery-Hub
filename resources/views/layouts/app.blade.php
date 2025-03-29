@@ -47,7 +47,7 @@
                 $(document).ready(function() {
                     Toastify({
                         text: '{{ session('success') }}',
-                        duration: 2000,
+                        duration: 3000,
                         close: true,
                         gravity: "top", // `top` hoặc `bottom`
                         position: "right", // `left`, `center` hoặc `right`
@@ -68,13 +68,15 @@
                 $(document).ready(function() {
                     Toastify({
                         text: '{{ session('error') }}',
-                        duration: 2000,
+                        duration: 3000,
                         close: true,
                         gravity: "top", // `top` hoặc `bottom`
                         position: "right", // `left`, `center` hoặc `right`
                         stopOnFocus: true, // Ngăn chặn đóng toast khi hover
                         style: {
-                            background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                            background: "#CC0000", /* mint-green */
+                            color: "#white", /* navy-blue */
+                            border: "1px solid #1B4B82"
                         },
                         onClick: function(){} // Callback sau khi click
                     }).showToast();

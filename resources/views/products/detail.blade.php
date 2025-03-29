@@ -7,22 +7,22 @@
             <!-- Product Image Gallery -->
             <div class="w-full md:w-2/5 lg:w-1/3">
                 <div class="bg-white p-4 rounded shadow-sm h-full">
-                    <img src="{{ $product->image }}" 
-                         alt="{{ $product->name }}" 
-                         class="w-full h-full object-cover">
+                    <img src="{{ $product->image }}"
+                        alt="{{ $product->name }}"
+                        class="w-full h-full object-cover">
                 </div>
             </div>
 
             <!-- Product Information -->
             <div class="w-full md:w-3/5 lg:w-2/3 bg-white p-4 rounded shadow-sm h-full">
                 <h1 class="text-2xl font-bold mb-2">{{ $product->name }}</h1>
-                
+
                 <div class="flex items-center mb-4">
                     <div class="flex text-yellow-500 mr-2">
                         @for($i = 0; $i < 4; $i++)
                             <span>★</span>
-                        @endfor
-                        <span>☆</span>
+                            @endfor
+                            <span>☆</span>
                     </div>
                     <span class="text-sm text-gray-600">(0 đánh giá)</span>
                     <span class="mx-2 text-gray-300">|</span>
@@ -31,10 +31,10 @@
 
                 <div class="bg-gray-100 p-4 rounded mb-4">
                     <div class="flex items-center">
-                        <span class="text-2xl font-bold text-navy mr-4">{{ number_format($product->price, 3, ',', '.') }} đ</span>
+                        <span class="text-2xl font-bold text-navy mr-4">{{ number_format($product->discount_price, 3, ',', '.') }} đ</span>
                         @if($product->discount_price > 0)
-                            <span class="text-gray-500 line-through mr-4">{{ number_format($product->discount_price, 3, ',', '.') }} đ</span>
-                            <span class="bg-navy text-white px-2 py-1 rounded">-{{ $product->discount }}%</span>
+                        <span class="text-gray-500 line-through mr-4">{{ number_format($product->price, 3, ',', '.') }} đ</span>
+                        <span class="bg-navy text-white px-2 py-1 rounded">-{{ $product->discount }}%</span>
                         @endif
                     </div>
                 </div>
@@ -72,9 +72,14 @@
                             Thêm vào giỏ hàng
                         </x-product.product-button>
                     </form>
-                    <x-product.product-button variant="primary">
-                        Mua ngay
-                    </x-product.product-button>
+                    <form action="{{ route('payment.direct') }}" method="POST" id="buy-now-form">
+                        @csrf
+                        <input type="hidden" name="id_product" value="{{ $product->id_product }}">
+                        <input type="hidden" name="quantity" id="quantity-hidden-buy-now">
+                        <x-product.product-button variant="primary" type="submit">
+                            Mua ngay
+                        </x-product.product-button>
+                    </form>
                 </div>
 
                 <div class="mt-4">
@@ -90,7 +95,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Product Description -->
         <div class="my-8 bg-white p-6 rounded shadow-sm">
             <h2 class="text-xl font-bold mb-4">Mô tả sản phẩm</h2>
@@ -105,6 +110,14 @@
     document.getElementById('add-to-cart-form').addEventListener('submit', function(e) {
         const quantityInput = document.getElementById('quantity-product-{{ $product->id_product }}');
         const quantityHidden = document.getElementById('quantity-hidden');
+        if (quantityInput) {
+            quantityHidden.value = quantityInput.value;
+        }
+    });
+
+    document.getElementById('buy-now-form').addEventListener('submit', function(e) {
+        const quantityInput = document.getElementById('quantity-product-{{ $product->id_product }}');
+        const quantityHidden = document.getElementById('quantity-hidden-buy-now');
         if (quantityInput) {
             quantityHidden.value = quantityInput.value;
         }

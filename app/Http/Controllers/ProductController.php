@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('per_page', 24);
-        $query = Product::where('hide', false);
+        $query = Product::where('hide', false)->where('nums', '>', 0);
         
         // Khởi tạo biến cho breadcrumb
         $breadcrumbItems = [];
@@ -93,10 +93,10 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
                 break;
             case 'price-asc':
-                $query->orderBy('price', 'asc');
+                $query->orderBy('discount_price', 'asc');
                 break;
             case 'price-desc':
-                $query->orderBy('price', 'desc');
+                $query->orderBy('discount_price', 'desc');
                 break;
             default:
                 $query->orderBy('created_at', 'desc');

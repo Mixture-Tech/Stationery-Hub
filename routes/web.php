@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
@@ -32,12 +34,31 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::post('/payment/direct', [PaymentController::class, 'directPayment'])->name('payment.direct');
+    Route::post('/payment/cart', [PaymentController::class, 'cartPayment'])->name('payment.cart');
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
+    Route::get('/payment/success/{order_id}', [PaymentController::class, 'success'])->name('payment.success');
+});
+
 Route::get('/payment', function () {
     return view('payment.index');
 });
 
 Route::get('/payment/success', function () {
     return view('payment.success');
+});
+
+Route::get('/debug-session', function () {
+    return session()->all();
+});
+
+Route::get('/debug-user', function () {
+    if (Auth::check()) {
+        return Auth::user();
+    }
+    return "Chưa đăng nhập";
 });
 
 require __DIR__.'/auth.php';

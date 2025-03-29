@@ -14,10 +14,10 @@ class UpdateDistrictFeeSeeder extends Seeder
             JOIN provinces p ON d.id_province = p.id_province
             SET d.fee = 
                 CASE 
-                    WHEN p.id_area = 2 THEN 40000
-                    WHEN p.id_area = 3 THEN 30000
-                    WHEN p.id_area = 4 THEN 20000
-                    WHEN p.id_area = 1 THEN 10000
+                    WHEN p.id_area = 2 THEN 40
+                    WHEN p.id_area = 3 THEN 30
+                    WHEN p.id_area = 4 THEN 20
+                    WHEN p.id_area = 1 THEN 10
                     ELSE d.fee
                 END
         ");

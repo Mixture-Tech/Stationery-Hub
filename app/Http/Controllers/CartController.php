@@ -17,7 +17,6 @@ class CartController extends Controller
                         ->get();
                         
         $subtotal = $cartItems->sum('total_price');
-        // $shipping = 35000; // Phí giao hàng cố định (có thể thay đổi logic)
         $total = $subtotal;
 
         return view('cart.index', compact('cartItems', 'subtotal', 'total'));
@@ -36,6 +35,15 @@ class CartController extends Controller
         $cartItem = Cart::where('id_user', $user->id_user)
                        ->where('id_product', $product->id_product)
                        ->first();
+
+        $newQuantity = $request->quantity;
+        if($cartItem){
+            $newQuantity += $cartItem->quantity;
+        }
+
+        if($newQuantity > $product->nums) {
+            return redirect()->back()->with('error', 'Số lượng yêu cầu cho ' . $newQuantity . ' không có sẵn!');
+        }
 
         if ($cartItem) {
             $cartItem->quantity += $request->quantity;
