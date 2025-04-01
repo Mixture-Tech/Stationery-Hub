@@ -1,14 +1,14 @@
 @extends('admin.admin')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-4">Category Parent</h2>
+    <h2 class="text-2xl font-bold mb-4">Category Parents</h2>
 
     <!-- Form tìm kiếm danh mục cha -->
     <div class="mb-4">
         <form action="{{ route('admin.categoryparents') }}" method="GET" class="flex items-center flex-wrap gap-2">
-            <input type="text" name="search" placeholder="Tìm kiếm theo tên danh mục cha..."
+            <input type="text" name="search" placeholder="Tìm kiếm theo mã số, tên danh mục cha..."
                 value="{{ request('search') }}"
-                class="border border-gray-300 rounded-lg px-4 py-2 w-1/3 min-w-[200px] text-center">
+                class="border border-gray-300 rounded-lg px-4 py-2 w-1/3 min-w-[200px] ">
 
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
                 🔍 Tìm kiếm

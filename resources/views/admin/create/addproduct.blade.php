@@ -2,6 +2,19 @@
 
 @section('content')
     <h2 class="text-2xl font-bold mb-4">Thêm sản phẩm mới</h2>
+
+    @if (session('error'))
+        <div class="bg-red-500 text-white p-3 rounded mb-4">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="bg-green-500 text-white p-3 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <form action="{{ route('admin.addProductPost') }}" method="POST" enctype="multipart/form-data"
         class="bg-white p-6 rounded-lg shadow-md">
         @csrf
@@ -9,6 +22,9 @@
         <div class="mb-4">
             <label class="block font-bold mb-2">Tên sản phẩm</label>
             <input type="text" name="name" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            @error('name')
+                <div class="text-red-500 mt-2">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-4">
@@ -18,7 +34,7 @@
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Giá</label>
-            <input type="number" id="price" name="price" class="w-full border-gray-300 rounded-lg px-4 py-2" required min="1" oninput="calculateDiscount()">
+            <input type="number" id="price" name="price" class="w-full border-gray-300 rounded-lg px-4 py-2" required min="1" step="0.01" oninput="calculateDiscount()">
         </div>
 
         <div class="mb-4">
@@ -30,6 +46,11 @@
             <label class="block font-bold mb-2">Giá sau giảm</label>
             <input type="hidden" id="discount_price" name="discount_price">
             <input type="text" id="discount_price_display" class="w-full border-gray-300 rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed" readonly>
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-bold mb-2">Tên thương hiệu</label>
+            <input type="text" name="brand" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
         </div>
 
         <div class="mb-4">

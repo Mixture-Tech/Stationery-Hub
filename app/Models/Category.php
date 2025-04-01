@@ -18,6 +18,8 @@ class Category extends Model
         'link',
         'id_parent',
         'hide',
+        'created_at',
+        'updated_at',
     ];
     
     protected $hidden = [

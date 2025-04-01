@@ -6,9 +6,9 @@
     <!-- Form tìm kiếm danh mục -->
     <div class="mb-4">
         <form action="{{ route('admin.categories') }}" method="GET" class="flex items-center flex-wrap gap-2">
-            <input type="text" name="search" placeholder="Tìm kiếm theo tên danh mục..."
+            <input type="text" name="search" placeholder="Tìm kiếm theo mã số, tên danh mục..."
                 value="{{ request('search') }}"
-                class="border border-gray-300 rounded-lg px-4 py-2 w-1/3 min-w-[200px] text-center">
+                class="border border-gray-300 rounded-lg px-4 py-2 w-1/3 min-w-[200px]">
             
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
                 🔍 Tìm kiếm

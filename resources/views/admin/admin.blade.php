@@ -22,7 +22,6 @@
 </head>
 <body class="bg-gray-200">
 <div class="flex h-screen">
-    <!-- Sidebar -->
     <div class="w-64 text-white p-6 sidebar">
         <h1 class="text-2xl font-bold flex items-center space-x-2 border-b border-white border-opacity-20 pb-4">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -31,14 +30,15 @@
             <span>Admin Panel</span>
         </h1>
         <ul class="mt-8 space-y-2">
+            <li><a href="{{ route('admin.dashboard') }}" class="menu-item block py-3 px-4 flex items-center space-x-3 cursor-pointer rounded-lg transition-all duration-300">Dashboard</a></li>
             <li><a href="{{ route('admin.products') }}" class="menu-item block py-3 px-4 flex items-center space-x-3 cursor-pointer rounded-lg transition-all duration-300">Products</a></li>
             <li><a href="{{ route('admin.categories') }}" class="menu-item block py-3 px-4 flex items-center space-x-3 cursor-pointer rounded-lg transition-all duration-300">Category</a></li>
             <li><a href="{{ route('admin.categoryparents') }}" class="menu-item block py-3 px-4 flex items-center space-x-3 cursor-pointer rounded-lg transition-all duration-300">Category Parent</a></li>
+            <li><a href="{{ route('admin.orders') }}" class="menu-item block py-3 px-4 flex items-center space-x-3 cursor-pointer rounded-lg transition-all duration-300">Orders</a></li>
             <li><a href="{{ route('admin.users') }}" class="menu-item block py-3 px-4 flex items-center space-x-3 cursor-pointer rounded-lg transition-all duration-300">Users</a></li>
         </ul>
     </div>
 
-    <!-- Nội dung chính -->
     <div class="flex-1 overflow-y-auto p-6 bg-gray-50 rounded-lg shadow-md">
         @yield('content')
     </div>

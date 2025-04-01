@@ -18,7 +18,7 @@
 
     <div class="mb-4">
         <label class="block font-bold mb-2">Giá</label>
-        <input type="number" id="price" name="price" value="{{ $product->price }}" class="w-full border-gray-300 rounded-lg px-4 py-2" required min="1" oninput="calculateDiscount()">
+        <input type="number" id="price" name="price" value="{{ $product->price }}" class="w-full border-gray-300 rounded-lg px-4 py-2" required min="1" step="0.01"  oninput="calculateDiscount()">
     </div>
 
     <div class="mb-4">
@@ -31,10 +31,14 @@
         <input type="hidden" id="discount_price" name="discount_price" value="{{ $product->discount_price }}">
         <input type="text" id="discount_price_display" class="w-full border-gray-300 rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed" readonly>
     </div>
+    <div class="mb-4">
+        <label class="block font-bold mb-2">Thương hiệu</label>
+        <input type="text" name="brand" value="{{ $product->brand }}" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+    </div>
 
     <div class="mb-4">
         <label class="block font-bold mb-2">Hình ảnh</label>
-        <input type="file" name="image" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+        <input type="file" name="image" class="w-full border-gray-300 rounded-lg px-4 py-2" >
         @if ($product->image)
             <img src="{{ asset('storage/' . $product->image) }}" alt="Hình ảnh sản phẩm" class="mt-2 w-32 h-32 object-cover rounded-lg">
         @endif

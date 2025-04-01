@@ -16,6 +16,8 @@ class CategoryParent extends Model
         'name_parent',
         'link',
         'hide',
+        'created_at',
+        'updated_at',
     ];
     
     protected $hidden = [
