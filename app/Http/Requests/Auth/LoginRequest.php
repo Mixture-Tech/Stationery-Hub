@@ -51,12 +51,27 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
+        // Lấy email từ request
+        $email = $this->input('email');
+
+        // Tìm người dùng dựa trên email
+        $user = \App\Models\User::where('email', $email)->first();
+
+        // Kiểm tra nếu người dùng không tồn tại hoặc hide = 1
+        if (!$user || $user->hide == 1) {
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'email' => 'Tài khoản không tồn tại hoặc đã bị vô hiệu hóa.',
+            ]);
+        }
+
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
                 'password' => 'Thông tin đăng nhập không đúng. Vui lòng kiểm tra email hoặc mật khẩu.',
-            ]);;
+            ]);
         }
 
         RateLimiter::clear($this->throttleKey());

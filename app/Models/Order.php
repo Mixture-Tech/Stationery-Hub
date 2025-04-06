@@ -21,6 +21,8 @@ class Order extends Model
         'id_area',
         'id_user',
         'payment_methods',
+        'hide',
+        'updated_at',
     ];
     
     protected $hidden = [
@@ -28,8 +30,8 @@ class Order extends Model
     ];
     
     protected $casts = [
-        'create_at' => 'datetime',
-        'update_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
     
     public function user(): BelongsTo
