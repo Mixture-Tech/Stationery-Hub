@@ -23,6 +23,7 @@ class Order extends Model
         'payment_methods',
         'hide',
         'updated_at',
+        'momo_order_id',
     ];
     
     protected $hidden = [

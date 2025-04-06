@@ -43,7 +43,13 @@
                 <div class="mt-6 pt-4 border-t border-gray-200">
                     <div class="flex justify-between items-center">
                         <p class="text-lg font-medium text-gray-600">Tổng tiền:</p>
-                        <p class="text-xl font-bold text-green-600">{{ number_format($order->total_price, 3, '.', '.') }} VND</p>
+                        <p class="text-xl font-bold text-green-600">
+                            @if($order->payment_methods == 'momo')
+                                {{ number_format($order->total_price * 10, 0, '.', '.') }} VND
+                            @else
+                                {{ number_format($order->total_price, 3, '.', '.') }} VND
+                            @endif
+                        </p>
                     </div>
                 </div>
             </div>
