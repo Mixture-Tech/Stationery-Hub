@@ -18,8 +18,7 @@ class AdminController extends Controller
         $search = $request->query('search');
         $query = Product::query();
 
-        $query->where('hide', 0)
-        ->where(function ($q) {
+        $query->where(function ($q) {
             $q->whereHas('category', function ($q2) {
                 $q2->where('hide', 0)
                     ->whereHas('parent', function ($q3) {
@@ -138,9 +137,10 @@ class AdminController extends Controller
     public function getidproduct($id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.update.updateproduct', compact('product'));
+        $categories = Category::where('hide',0)->get();
+        return view('admin.update.updateproduct', compact('product', 'categories'));
     }
-
+    
     public function updateproduct(Request $request, $id)
     {
         $product = Product::findOrFail($id);
@@ -153,6 +153,7 @@ class AdminController extends Controller
             'brand' => 'required|string|max:255',
             'hide' => 'required|in:0,1',
             'image' => 'nullable|image|max:2048',
+            'id_category' => 'required|exists:categories,id_category', 
         ]);
     
         $discount_price = $request->price * (1 - ($request->discount / 100));
@@ -160,7 +161,7 @@ class AdminController extends Controller
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
         } else {
-            $imagePath = $product->image; 
+            $imagePath = $product->image;
         }
     
         $product->update([
@@ -171,7 +172,8 @@ class AdminController extends Controller
             'discount' => $request->discount,
             'brand' => $request->brand,
             'hide' => (int) $request->hide,
-            'image' => $imagePath, 
+            'image' => $imagePath,
+            'id_category' => $request->id_category, 
         ]);
     
         return redirect()->route('admin.products')->with('success', 'Sản phẩm đã được cập nhật.');
@@ -181,7 +183,8 @@ class AdminController extends Controller
     public function getidcategory($id)
     {
         $category = Category::findOrFail($id);
-        return view('admin.update.updatecategory', compact('category'));
+        $categoryparents = CategoryParent::where('hide', 0)->get();
+        return view('admin.update.updatecategory', compact('category','categoryparents'));
     }
 
     public function updatecategory(Request $request, $id)
@@ -189,12 +192,14 @@ class AdminController extends Controller
         $request->validate([
             'name_category' => 'required|string|max:255',
             'hide' => 'required|in:0,1',
+            'id_parent' => 'required|exists:category_parents,id_parent', 
         ]);
 
         $category = Category::findOrFail($id);
         $category->update([
             'name_category' => $request->name_category,
             'hide' => (int) $request->hide, 
+            'id_parent' => $request->id_parent,
         ]);
 
         return redirect()->route('admin.categories')->with('success', 'Danh mục đã được cập nhật!');
@@ -297,7 +302,7 @@ class AdminController extends Controller
         ]);
         
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('uploads', 'public');
+            $validated['image'] = $request->file('image')->store('products', 'public');
         }
         
         Product::create($validated);
