@@ -45,6 +45,17 @@
     </div>
 
     <div class="mb-4">
+        <label class="block font-bold mb-2">Danh mục</label>
+        <select name="id_category" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            @foreach($categories as $category)
+                <option value="{{ $category->id_category }}" {{ $product->id_category == $category->id_category ? 'selected' : '' }}>
+                    {{ $category->name_category }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="mb-4">
         <label class="block font-bold mb-2">Ẩn sản phẩm</label>
         <select name="hide" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
             <option value="0" {{ $product->hide == 0 ? 'selected' : '' }}>Hiển thị</option>
