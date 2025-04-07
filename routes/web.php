@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\MomoPaymentController;
 use App\Http\Controllers\VnpayPaymentController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -43,14 +43,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
     Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
     Route::get('/payment/success/{order_id}', [PaymentController::class, 'success'])->name('payment.success');
-    
-    // Routes cho MomoPaymentController
     Route::post('/payment/momo/ipn', [PaymentController::class, 'ipn'])->name('payment.momo.ipn');
     Route::get('/payment/momo/callback', [PaymentController::class, 'momoCallback'])->name('payment.momo.callback');
     
     // Routes cho VNPayController
     Route::post('/payment/vnpay/ipn', [VnpayPaymentController::class, 'ipn'])->name('payment.vnpay.ipn');
     Route::get('/payment/vnpay/callback', [VnpayPaymentController::class, 'callback'])->name('payment.vnpay.callback');
+});
+
+// Routes cho đơn hàng
+Route::middleware(['auth'])->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [OrderController::class, 'detail'])->name('orders.detail');
+    Route::patch('/orders/{id}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::patch('/orders/{id}/hide', [OrderController::class, 'hide'])->name('orders.hide');
 });
 
 Route::get('/payment', function () {

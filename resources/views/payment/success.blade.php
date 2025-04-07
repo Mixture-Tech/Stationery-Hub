@@ -45,9 +45,9 @@
                         <p class="text-lg font-medium text-gray-600">Tổng tiền:</p>
                         <p class="text-xl font-bold text-green-600">
                             @if($order->payment_methods == 'momo')
-                                {{ number_format($order->total_price * 10, 0, '.', '.') }} VND
+                                {{ number_format($order->total_price, 0, '.', '.') }} đ
                             @else
-                                {{ number_format($order->total_price, 3, '.', '.') }} VND
+                                {{ number_format($order->total_price, 3, '.', '.') }} đ
                             @endif
                         </p>
                     </div>

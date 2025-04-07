@@ -25,6 +25,8 @@ class Order extends Model
         'updated_at',
         'momo_order_id',
         'vnpay_order_id',
+        'phone',
+        'address'
     ];
     
     protected $hidden = [

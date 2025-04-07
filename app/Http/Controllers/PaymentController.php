@@ -254,21 +254,17 @@ class PaymentController extends Controller
     {
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
+        // Thông tin cấu hình MoMo (dùng thông tin sandbox để test)
         $partnerCode = 'MOMOBKUN20180529';
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-        $orderInfo = "Thanh toán đơn hàng Stationery Hub qua ATM MoMo";
-        $orderId = time() . "_" . Auth::id();
-        
-        // Sử dụng route mới cho callback
-        $redirectUrl = route('payment.momo.callback');
-        $ipnUrl = route('payment.momo.ipn');
+        $orderInfo = "Thanh toán đơn hàng Stationery Hub qua MoMo QR";
+        $orderId = time() . "_" . Auth::id(); // ID đơn hàng duy nhất
+        $redirectUrl = route('payment.momo.callback'); // URL MoMo gọi lại sau khi thanh toán
+        $ipnUrl = route('payment.momo.ipn'); // URL thông báo kết quả từ MoMo
 
-        $district = District::findOrFail($request->id_district);
-        $id_province = $district->id_province;
-        $province = Province::findOrFail($id_province);
-        $id_area = $province->id_area; // Lấy id_area từ Province
-            $extraData = base64_encode(json_encode([
+        // Dữ liệu bổ sung (extraData) để lưu thông tin đơn hàng
+        $extraData = base64_encode(json_encode([
             'items' => $items,
             'customer_info' => [
                 'name' => $request->name,
@@ -278,32 +274,30 @@ class PaymentController extends Controller
             ],
             'id_district' => $request->id_district,
             'id_province' => $request->id_province,
-            'id_area' => $id_area,
+            'id_area' => Province::findOrFail($request->id_province)->id_area,
             'from_cart' => $request->input('from_cart', false)
         ]));
 
-        $requestId = time() . "";
-        $requestType = "payWithATM";
+        $requestId = time() . ""; // ID yêu cầu duy nhất
+        $requestType = "captureWallet"; // Loại yêu cầu cho QR và ví MoMo
 
-        // Định dạng $amount thành chuỗi số nguyên
-        // $amount = (string) intval($amount);
-        // if ($amount <= 0) {
-        //     return redirect()->back()->with('error', 'Số tiền thanh toán phải lớn hơn 0.');
-        // }
-        $originalAmount = $amount;
-        $amount = (int) round($amount * 10);
-        $amount = (string) intval($amount);
+        // Xử lý số tiền (amount)
+        $amount = (int) round($amount) * 10; // Đảm bảo amount là số nguyên (VNĐ)
+        if ($amount <= 0) {
+            return redirect()->back()->with('error', 'Số tiền thanh toán phải lớn hơn 0.');
+        }
 
-        //before sign HMAC SHA256 signature
-        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;        
+        // Tạo chữ ký HMAC SHA256
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
         $signature = hash_hmac("sha256", $rawHash, $secretKey);
 
-        $data = array(
+        // Dữ liệu gửi đến MoMo
+        $data = [
             'partnerCode' => $partnerCode,
             'partnerName' => "Stationery Hub",
-            "storeId" => "StationeryHubMomo",
+            'storeId' => "StationeryHubMomo",
             'requestId' => $requestId,
-            'amount' => $amount,
+            'amount' => $amount, // Số tiền dạng số nguyên
             'orderId' => $orderId,
             'orderInfo' => $orderInfo,
             'redirectUrl' => $redirectUrl,
@@ -312,24 +306,26 @@ class PaymentController extends Controller
             'extraData' => $extraData,
             'requestType' => $requestType,
             'signature' => $signature
-        );
-        
-        Log::info('MoMo Request Data', $data);
-        
-        $result = $this->execPostRequest($endpoint, json_encode($data));
-        $jsonResult = json_decode($result, true);  // decode json
-        
-        Log::info('MoMo Response', $jsonResult);
+        ];
 
-        if (isset($jsonResult['payUrl'])) {
-            // Lưu tạm thông tin đơn hàng vào session để xử lý sau khi MoMo xác nhận
+        Log::info('MoMo QR Request Data', $data);
+
+        // Gửi yêu cầu đến MoMo
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true);
+
+        Log::info('MoMo QR Response', $jsonResult);
+
+        // Kiểm tra phản hồi từ MoMo
+        if (isset($jsonResult['payUrl']) && !empty($jsonResult['payUrl'])) {
+            // Lưu thông tin đơn hàng tạm thời vào session
             session([
                 'pending_order' => [
                     'id_user' => Auth::id(),
                     'id_district' => $request->id_district,
                     'id_province' => $request->id_province,
-                    'id_area' => $request->$id_area,
-                    'total_price' => $originalAmount,
+                    'id_area' => Province::findOrFail($request->id_province)->id_area,
+                    'total_price' => $amount,
                     'payment_methods' => 'momo',
                     'items' => $items,
                     'order_id' => $orderId,
@@ -342,10 +338,13 @@ class PaymentController extends Controller
                     'from_cart' => $request->input('from_cart', false)
                 ]
             ]);
+
+            // Trả về payUrl để hiển thị mã QR hoặc chuyển hướng
             return redirect()->to($jsonResult['payUrl']);
         }
 
-        return redirect()->back()->with('error', 'Không thể tạo yêu cầu thanh toán MoMo: ' . ($jsonResult['message'] ?? 'Lỗi không xác định'));
+        // Nếu có lỗi, trả về thông báo
+        return redirect()->back()->with('error', 'Không thể tạo mã QR MoMo: ' . ($jsonResult['message'] ?? 'Lỗi không xác định'));
     }
 
     public function momoCallback(Request $request)
