@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\MomoPaymentController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -35,13 +36,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    // Routes cho PaymentController
     Route::post('/payment/direct', [PaymentController::class, 'directPayment'])->name('payment.direct');
     Route::post('/payment/cart', [PaymentController::class, 'cartPayment'])->name('payment.cart');
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
     Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
     Route::get('/payment/success/{order_id}', [PaymentController::class, 'success'])->name('payment.success');
-    Route::post('/payment/momo/ipn', [PaymentController::class, 'momoIpn'])->name('payment.momo.ipn');
-    Route::get('/payment/momo/callback', [PaymentController::class, 'momoCallback'])->name('payment.momo.callback');
+    
+    // Routes cho MomoPaymentController
+    Route::post('/payment/momo/ipn', [MomoPaymentController::class, 'ipn'])->name('payment.momo.ipn');
+    Route::get('/payment/momo/callback', [MomoPaymentController::class, 'callback'])->name('payment.momo.callback');
 });
 
 Route::get('/payment', function () {
