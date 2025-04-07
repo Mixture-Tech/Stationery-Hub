@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MomoPaymentController;
+use App\Http\Controllers\VnpayPaymentController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -44,8 +45,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment/success/{order_id}', [PaymentController::class, 'success'])->name('payment.success');
     
     // Routes cho MomoPaymentController
-    Route::post('/payment/momo/ipn', [MomoPaymentController::class, 'ipn'])->name('payment.momo.ipn');
-    Route::get('/payment/momo/callback', [MomoPaymentController::class, 'callback'])->name('payment.momo.callback');
+    Route::post('/payment/momo/ipn', [PaymentController::class, 'ipn'])->name('payment.momo.ipn');
+    Route::get('/payment/momo/callback', [PaymentController::class, 'momoCallback'])->name('payment.momo.callback');
+    
+    // Routes cho VNPayController
+    Route::post('/payment/vnpay/ipn', [VnpayPaymentController::class, 'ipn'])->name('payment.vnpay.ipn');
+    Route::get('/payment/vnpay/callback', [VnpayPaymentController::class, 'callback'])->name('payment.vnpay.callback');
 });
 
 Route::get('/payment', function () {

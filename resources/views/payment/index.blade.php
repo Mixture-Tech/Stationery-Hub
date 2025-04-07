@@ -55,7 +55,11 @@
                             <h2 class="font-bold mb-4">PHƯƠNG THỨC THANH TOÁN</h2>
                             <label class="flex items-center mb-2">
                                 <input type="radio" name="payment_methods" value="momo" class="mr-2">
-                                Ví MoMo
+                                Thanh toán qua Momo
+                            </label>
+                            <label class="flex items-center mb-2">
+                                <input type="radio" name="payment_methods" value="vnpay" class="mr-2">
+                                Thanh toán qua VNPay
                             </label>
                             <label class="flex items-center mb-2">
                                 <input type="radio" name="payment_methods" value="COD" class="mr-2">
