@@ -21,7 +21,7 @@
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Tên sản phẩm</label>
-            <input type="text" name="name" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            <input type="text" name="name" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
             @error('name')
                 <div class="text-red-500 mt-2">{{ $message }}</div>
             @enderror
@@ -29,38 +29,41 @@
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Số lượng</label>
-            <input type="number" name="nums" class="w-full border-gray-300 rounded-lg px-4 py-2" required min="1">
+            <input type="number" name="nums" class="w-full border border-gray-400 rounded-lg px-4 py-2" required min="1">
         </div>
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Giá</label>
-            <input type="number" id="price" name="price" class="w-full border-gray-300 rounded-lg px-4 py-2" required min="1" step="0.01" oninput="calculateDiscount()">
+            <input type="number" id="price" name="price" class="w-full border border-gray-400 rounded-lg px-4 py-2" required min="1" step="0.01" oninput="calculateDiscount()">
         </div>
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Giảm giá (%)</label>
-            <input type="number" id="discount" name="discount" class="w-full border-gray-300 rounded-lg px-4 py-2" min="0" max="100" oninput="calculateDiscount()">
+            <input type="number" id="discount" name="discount" class="w-full border border-gray-400 rounded-lg px-4 py-2" min="0" max="100" oninput="calculateDiscount()">
         </div>
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Giá sau giảm</label>
             <input type="hidden" id="discount_price" name="discount_price">
-            <input type="text" id="discount_price_display" class="w-full border-gray-300 rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed" readonly>
+            <input type="text" id="discount_price_display" class="w-full border border-gray-400 rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed" readonly>
         </div>
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Tên thương hiệu</label>
-            <input type="text" name="brand" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            <input type="text" name="brand" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
         </div>
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Hình ảnh</label>
-            <input type="file" name="image" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            <input type="file" name="image" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
+            @error('image')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="mb-4">
             <label for="id_category" class="block font-bold mb-2">Danh mục</label>
-            <select name="id_category" class="w-full border border-gray-300 rounded px-4 py-2" required>
+            <select name="id_category" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
                 <option value="">-- Chọn danh mục --</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id_category }}">{{ $category->name_category }}</option>
@@ -70,7 +73,7 @@
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Trạng thái</label>
-            <select name="hide" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            <select name="hide" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
                 <option value="0">Hiển thị</option>
                 <option value="1">Ẩn</option>
             </select>

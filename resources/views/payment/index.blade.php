@@ -73,7 +73,21 @@
                             <div class="border-b pb-2 mb-2 text-sm">
                                 @foreach($items as $item)
                                     <div class="flex items-center mb-2">
-                                        <img src="{{ $item['product']->image }}" alt="{{ $item['product']->name }}" class="w-12 h-12 mr-4">
+                                        @if($item['product'] && $item['product']->image)
+                                            @if(file_exists(public_path('storage/' . $item['product']->image)))
+                                                <img src="{{ asset('storage/' . $item['product']->image) }}"
+                                                    alt="{{ $item['product']->name }}"
+                                                    class="w-12 h-12 mr-4">
+                                            @else
+                                                <img src="{{ $item['product']->image }}"
+                                                    alt="{{ $item['product']->name }}"
+                                                    class="w-12 h-12 mr-4">
+                                            @endif
+                                        @else
+                                            <img src="{{ asset('resources/images/default-product.jpg') }}"
+                                                alt="{{ $item['product']->name ?? 'Sản phẩm' }}"
+                                                class="w-12 h-12 mr-4">
+                                        @endif
                                         <div class="flex-1">
                                             <p>{{ $item['product']->name }}</p>
                                         </div>

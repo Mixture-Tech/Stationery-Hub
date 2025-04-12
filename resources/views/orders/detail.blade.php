@@ -29,12 +29,14 @@
                             <span class="text-gray-600">Trạng thái:</span>
                             <span class="px-2 py-1 rounded text-white text-sm
                                 @if($order->status == 'Pending') bg-yellow-600
+                                @elseif($order->status == 'Confirmed') bg-purple-500
                                 @elseif($order->status == 'Processing') bg-blue-500
                                 @elseif($order->status == 'Shipped') bg-purple-500
                                 @elseif($order->status == 'Complete') bg-green-500
                                 @elseif($order->status == 'Cancelled') bg-red-500
                                 @endif">
                                 @if($order->status == 'Pending') Chờ xác nhận
+                                @elseif($order->status == 'Confirmed') Xác nhận
                                 @elseif($order->status == 'Processing') Đang xử lý
                                 @elseif($order->status == 'Shipped') Đang giao
                                 @elseif($order->status == 'Complete') Đã giao
@@ -96,7 +98,21 @@
                         <tr class="border-b hover:bg-gray-50">
                             <td class="py-3 px-4">
                                 <div class="flex items-center">
-                                    <img src="{{ $detail->product->image ?? asset('resources/images/default-product.jpg') }}" alt="{{ $detail->product->name ?? 'Sản phẩm' }}" class="w-16 h-16 object-cover mr-3 border">
+                                    @if($detail->product && $detail->product->image)
+                                        @if(file_exists(public_path('storage/' . $detail->product->image)))
+                                            <img src="{{ asset('storage/' . $detail->product->image) }}"
+                                                 alt="{{ $detail->product->name ?? 'Sản phẩm' }}"
+                                                 class="w-16 h-16 object-cover mr-3 border">
+                                        @else
+                                            <img src="{{ $detail->product->image }}"
+                                                 alt="{{ $detail->product->name ?? 'Sản phẩm' }}"
+                                                 class="w-16 h-16 object-cover mr-3 border">
+                                        @endif
+                                    @else
+                                        <img src="{{ asset('resources/images/default-product.jpg') }}"
+                                             alt="{{ $detail->product->name ?? 'Sản phẩm' }}"
+                                             class="w-16 h-16 object-cover mr-3 border">
+                                    @endif
                                     <div>
                                         <div class="font-medium">{{ $detail->product->name ?? 'Sản phẩm không có sẵn' }}</div>
                                     </div>
@@ -148,17 +164,19 @@
                 <div class="relative">
                     <div class="flex items-center justify-between w-full">
                         <div class="flex flex-col items-center">
-                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <div class="w-8 h-8 {{ in_array($order->status, ['Pending','Confirmed', 'Shipped', 'Complete']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
+                                @if(in_array($order->status, ['Pending','Confirmed', 'Shipped', 'Complete']))
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
+                                @endif
                             </div>
-                            <span class="text-xs mt-1">Đặt hàng</span>
+                            <span class="text-xs mt-1">Chờ xác nhận</span>
                         </div>
                         
                         <div class="flex flex-col items-center">
-                            <div class="w-8 h-8 {{ in_array($order->status, ['processing', 'shipped', 'delivered']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
-                                @if(in_array($order->status, ['processing', 'shipped', 'delivered']))
+                            <div class="w-8 h-8 {{ in_array($order->status, ['Confirmed', 'Shipped', 'Complete']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
+                                @if(in_array($order->status, ['Confirmed', 'Shipped', 'Complete']))
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
@@ -168,8 +186,8 @@
                         </div>
                         
                         <div class="flex flex-col items-center">
-                            <div class="w-8 h-8 {{ in_array($order->status, ['shipped', 'delivered']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
-                                @if(in_array($order->status, ['shipped', 'delivered']))
+                            <div class="w-8 h-8 {{ in_array($order->status, ['Shipped', 'Complete']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
+                                @if(in_array($order->status, ['Shipped', 'Complete']))
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
@@ -179,8 +197,8 @@
                         </div>
                         
                         <div class="flex flex-col items-center">
-                            <div class="w-8 h-8 {{ $order->status == 'delivered' ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
-                                @if($order->status == 'delivered')
+                            <div class="w-8 h-8 {{ $order->status == 'Complete' ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
+                                @if($order->status == 'Complete')
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
@@ -194,7 +212,7 @@
                     <div class="absolute top-4 left-0 w-full h-0.5 bg-gray-200 -z-10">
                         <div class="h-full bg-green-500" style="width: 
                             @if($order->status == 'Pending') 0%
-                            @elseif($order->status == 'Processing') 33%
+                            @elseif($order->status == 'Confirmed') 33%
                             @elseif($order->status == 'Shipped') 67%
                             @elseif($order->status == 'Complete') 100%
                             @else 0%
@@ -203,11 +221,11 @@
                     </div>
                 </div>
                 
-                @if($order->status == 'cancelled')
+                @if($order->status == 'Cancelled')
                 <div class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
                     <p class="font-medium">Đơn hàng đã bị hủy</p>
                 </div>
-                @elseif($order->status == 'pending')
+                @elseif($order->status == 'Pending')
                 <div class="mt-4 flex justify-end">
                     <form action="{{ route('orders.cancel', $order->id_order) }}" method="POST" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?')">
                         @csrf

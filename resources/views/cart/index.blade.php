@@ -27,7 +27,21 @@
                             <input type="checkbox" name="cart_ids[]" value="{{ $item->id }}" class="mr-4 cart-item-checkbox"
                                 data-price="{{ $item->total_price }}"
                                 {{ in_array($item->id, session('selected_cart_ids', [])) ? 'checked' : '' }}>
-                            <img src="{{ $item->product->image }}" alt="{{ $item->product->name }}" class="w-20 h-20 object-cover mr-4">
+                            @if($item->product && $item->product->image)
+                                @if(file_exists(public_path('storage/' . $item->product->image)))
+                                    <img src="{{ asset('storage/' . $item->product->image) }}"
+                                         alt="{{ $item->product->name }}"
+                                         class="w-20 h-20 object-cover mr-4">
+                                @else
+                                    <img src="{{ $item->product->image }}"
+                                         alt="{{ $item->product->name }}"
+                                         class="w-20 h-20 object-cover mr-4">
+                                @endif
+                            @else
+                                <img src="{{ asset('resources/images/default-product.jpg') }}"
+                                     alt="{{ $item->product->name ?? 'Sản phẩm' }}"
+                                     class="w-20 h-20 object-cover mr-4">
+                            @endif
                             <div class="flex-grow">
                                 <p class="font-medium">{{ $item->product->name }}</p>
                                 <p class="text-sm text-gray-500">{{ number_format($item->product->discount_price, 3, '.', '.') }} đ</p>

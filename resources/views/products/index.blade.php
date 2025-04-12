@@ -127,7 +127,7 @@
                         <div class="relative">
                             <x-product.product-card
                                 id="{{ $product->id_product }}"
-                                image="{{ $product->image }}"
+                                :image="$product->image ? (file_exists(public_path('storage/' . $product->image)) ? asset('storage/' . $product->image) : $product->image) : null"
                                 name="{{ $product->name }}"
                                 price="{{ $product->price }}"
                                 discountPrice="{{ $product->discount_price }}"

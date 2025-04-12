@@ -20,7 +20,7 @@
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Tên danh mục</label>
-            <input type="text" name="name_category" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            <input type="text" name="name_category" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
             @error('name_category')
                 <div class="text-red-500 mt-2">{{ $message }}</div>
             @enderror
@@ -28,7 +28,7 @@
 
         <div class="mb-4">
             <label for="id_parent" class="block font-bold mb-2">Danh mục cha</label>
-            <select name="id_parent" class="w-full border border-gray-300 rounded px-4 py-2" required>
+            <select name="id_parent" class="w-full border border-gray-400 rounded px-4 py-2" required>
                 <option value="">-- Chọn danh mục cha --</option>
                 @foreach ($categoryparents as $categoryparent)
                     <option value="{{ $categoryparent->id_parent }}">{{ $categoryparent->name_parent }}</option>
@@ -38,7 +38,7 @@
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Trạng thái</label>
-            <select name="hide" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            <select name="hide" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
                 <option value="0">Hiển thị</option>
                 <option value="1">Ẩn</option>
             </select>

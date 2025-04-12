@@ -8,15 +8,18 @@
 
     <div class="mb-4">
         <label class="block font-bold mb-2">Trạng thái đơn hàng</label>
-        <select name="status" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
-            <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>Chờ xử lý</option>
+        <select name="status" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
+            <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>Chờ xác nhận</option>
+            <option value="Confirmed" {{ $order->status == 'Confirmed' ? 'selected' : '' }}>Xác nhận</option>
             <option value="Processing" {{ $order->status == 'Processing' ? 'selected' : '' }}>Đang xử lý</option>
-            <option value="Complete" {{ $order->status == 'Complete' ? 'selected' : '' }}>Hoàn thành</option>
+            <option value="Shipped" {{ $order->status == 'Shipped' ? 'selected' : '' }}>Đang giao</option>
+            <option value="Complete" {{ $order->status == 'Complete' ? 'selected' : '' }}>Đã giao</option>
+            <option value="Cancelled" {{ $order->status == 'Cancelled' ? 'selected' : '' }}>Đã hủy</option>
         </select>
     </div>
     <div class="mb-4">
         <label class="block font-bold mb-2">Ẩn đơn hàng</label>
-        <select name="hide" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+        <select name="hide" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
             <option value="0" {{ $order->hide == 0 ? 'selected' : '' }}>Hiển thị</option>
             <option value="1" {{ $order->hide == 1 ? 'selected' : '' }}>Ẩn</option>
         </select>

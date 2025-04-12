@@ -7,9 +7,21 @@
             <!-- Product Image Gallery -->
             <div class="w-full md:w-2/5 lg:w-1/3">
                 <div class="bg-white p-4 rounded shadow-sm h-full">
-                    <img src="{{ $product->image }}"
-                        alt="{{ $product->name }}"
-                        class="w-full h-full object-cover">
+                    @if($product->image)
+                        @if(file_exists(public_path('storage/' . $product->image)))
+                            <img src="{{ asset('storage/' . $product->image) }}"
+                                alt="{{ $product->name }}"
+                                class="w-full h-full object-cover">
+                        @else
+                            <img src="{{ $product->image }}"
+                                alt="{{ $product->name }}"
+                                class="w-full h-full object-cover">
+                        @endif
+                    @else
+                        <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                            <span class="text-gray-500">Không có ảnh</span>
+                        </div>
+                    @endif
                 </div>
             </div>
 

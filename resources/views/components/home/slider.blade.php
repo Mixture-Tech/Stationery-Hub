@@ -1,17 +1,20 @@
 @vite('resources/js/home/slide.js')
 
-<div id="controls-carousel" class="relative w-full" data-carousel="static">
+<div id="controls-carousel" class="relative w-full" data-carousel="slide" data-carousel-interval="3000">
     <!-- Carousel wrapper -->
     <div class="relative h-56 overflow-hidden rounded-[30px] md:h-96">
         <!-- Item 1 -->
-        <div class="duration-700 ease-in-out" data-carousel-item>
-            <img src="{{ Vite::asset('resources/images/slides/slide_1.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-[30px]" alt="...">
+        <div class="duration-700 ease-in-out hidden" data-carousel-item>
+            <img src="{{ Vite::asset('resources/images/slides/slide_3.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-[30px]" alt="...">
         </div>
-        <!-- Item 2 -->
+        <!-- Item 2 (slide active ban đầu) -->
         <div class="duration-700 ease-in-out" data-carousel-item="active">
-            <img src="{{ Vite::asset('resources/images/slides/slide_2.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-[30px]" alt="...">
+            <img src="{{ Vite::asset('resources/images/slides/slide_4.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-[30px]" alt="...">
         </div>
-
+        <!-- Item 3 -->
+        <div class="duration-700 ease-in-out hidden" data-carousel-item>
+            <img src="{{ Vite::asset('resources/images/slides/slide_5.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-[30px]" alt="...">
+        </div>
     </div>
     <!-- Slider controls -->
     <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>

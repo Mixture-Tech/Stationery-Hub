@@ -58,11 +58,29 @@
                             <td class="border border-gray-300 px-4 py-2 text-center">{{ optional($order->area)->name ?? 'N/A' }}</td>
                             <td class="border border-gray-300 px-4 py-2 text-center">{{ number_format($order->total_price, 2, ',', '.') }} VNĐ</td>
                             <td class="border border-gray-300 px-4 py-2 text-center">
-                                <span class="px-2 py-1 rounded 
-                                    {{ $order->status == 'Pending' ? 'bg-yellow-500 text-white' : 
-                                    ($order->status == 'Processing' ? 'bg-blue-500 text-white' : 'bg-green-500 text-white') }}">
+                                <span class="px-2 py-1 rounded
+                                {{ $order->status == 'Pending' ? 'text-yellow-600 font-medium' : 
+                                   ($order->status == 'Confirmed' ? 'text-purple-600 font-medium' :
+                                   ($order->status == 'Processing' ? 'text-blue-600 font-medium' : 
+                                   ($order->status == 'Shipped' ? 'text-teal-600 font-medium' :
+                                   ($order->status == 'Complete' ? 'text-green-600 font-medium' :
+                                   ($order->status == 'Cancelled' ? 'text-red-600 font-medium' : 'text-gray-600 font-medium'))))) }}">
+                                @if($order->status == 'Pending')
+                                    Chờ xác nhận
+                                @elseif($order->status == 'Confirmed')
+                                    Xác nhận
+                                @elseif($order->status == 'Processing')
+                                    Đang xử lý
+                                @elseif($order->status == 'Shipped')
+                                    Đang giao
+                                @elseif($order->status == 'Complete')
+                                    Đã giao
+                                @elseif($order->status == 'Cancelled')
+                                    Đã hủy
+                                @else
                                     {{ $order->status }}
-                                </span>
+                                @endif
+                            </span>
                             </td>
                             <td class="border border-gray-300 px-4 py-2 text-center">{{ $order->payment_methods }}</td>
                             <td class="border border-gray-300 px-4 py-2 text-center">{{ $order->created_at->format('d/m/Y H:i') }}</td>

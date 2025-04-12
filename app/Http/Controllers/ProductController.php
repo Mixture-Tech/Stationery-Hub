@@ -102,6 +102,12 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
         }
 
+        if ($request->filled('search')) {
+            $searchTerm = $request->input('search');
+            $query->where('name', 'like', '%' . $searchTerm . '%');
+        }
+
+        
         $products = $query->paginate($perPage);
         
         $categoryParents = CategoryParent::where('hide', false)->get();

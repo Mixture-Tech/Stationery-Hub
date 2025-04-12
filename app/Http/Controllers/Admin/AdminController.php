@@ -239,7 +239,7 @@ class AdminController extends Controller
         $order = Order::findOrFail($id);
         
         $request->validate([
-            'status' => 'required|in:Pending,Processing,Complete',
+            'status' => 'required|in:Pending,Confirmed,Processing,Shipped,Complete,Cancelled',
             'hide' => 'required|boolean',
         ]);
         
@@ -298,7 +298,9 @@ class AdminController extends Controller
             'id_category' => 'required|exists:categories,id_category',
 
         ],[
-            'name.unique' => 'Sản phẩm này đã tồn tại. Vui lòng nhập tên khác!'
+            'name.unique' => 'Sản phẩm này đã tồn tại. Vui lòng nhập tên khác!',
+            'image.image' => 'File tải lên phải là hình ảnh!',
+            'image.mimes' => 'Hình ảnh phải có định dạng jpg, jpeg hoặc png!',
         ]);
         
         if ($request->hasFile('image')) {

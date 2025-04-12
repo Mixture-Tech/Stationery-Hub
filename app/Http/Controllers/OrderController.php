@@ -45,10 +45,10 @@ class OrderController extends Controller
         $user = Auth::user();
         $order = Order::where('id_order', $id)
             ->where('id_user', $user->id_user)
-            ->where('status', 'pending')
+            ->where('status', 'Pending')
             ->firstOrFail();
             
-        $order->status = 'cancelled';
+        $order->status = 'Cancelled';
         $order->save();
         
         return redirect()->route('orders.index')->with('success', 'Đơn hàng đã được hủy thành công');

@@ -8,7 +8,7 @@
 
     <div class="mb-4">
         <label class="block font-bold mb-2">Chức vụ</label>
-        <select name="id_role" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+        <select name="id_role" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
             <option value="3" {{ $user->id_role == '3' ? 'selected' : '' }}>USER</option>
             <option value="2" {{ $user->id_role == '2' ? 'selected' : '' }}>EMPLOYEE</option>
             <option value="1" {{ $user->id_role == '1' ? 'selected' : '' }}>ADMIN</option>
@@ -16,7 +16,7 @@
     </div>
     <div class="mb-4">
         <label class="block font-bold mb-2">Ẩn đơn hàng</label>
-        <select name="hide" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+        <select name="hide" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
             <option value="0" {{ $user->hide == 0 ? 'selected' : '' }}>Hiển thị</option>
             <option value="1" {{ $user->hide == 1 ? 'selected' : '' }}>Ẩn</option>
         </select>

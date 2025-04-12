@@ -23,7 +23,7 @@
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Tên danh mục</label>
-            <input type="text" name="name_parent" class="w-full border-gray-300 rounded-lg px-4 py-2" value="{{ old('name_parent') }}" required>
+            <input type="text" name="name_parent" class="w-full border border-gray-400 rounded-lg px-4 py-2" value="{{ old('name_parent') }}" required>
 
             @error('name_parent')
                 <div class="text-red-500 mt-2">{{ $message }}</div>
@@ -32,7 +32,7 @@
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Trạng thái</label>
-            <select name="hide" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            <select name="hide" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
                 <option value="0" {{ old('hide') == "0" ? 'selected' : '' }}>Hiển thị</option>
                 <option value="1" {{ old('hide') == "1" ? 'selected' : '' }}>Ẩn</option>
             </select>

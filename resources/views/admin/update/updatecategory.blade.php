@@ -10,12 +10,12 @@
         <div class="mb-4">
             <label class="block font-bold mb-2">Tên danh mục</label>
             <input type="text" name="name_category" value="{{ $category->name_category }}" 
-                class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+                class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
         </div>
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Danh mục cha</label>
-            <select name="id_parent" class="w-full border-gray-300 rounded-lg px-4 py-2" required>
+            <select name="id_parent" class="w-full border border-gray-400 rounded-lg px-4 py-2" required>
                 @foreach($categoryparents as $categoryparent)
                     <option value="{{ $categoryparent->id_parent }}" {{ $category->id_parent == $categoryparent->id_parent ? 'selected' : '' }}>
                         {{ $categoryparent->name_parent }}
@@ -26,7 +26,7 @@
 
         <div class="mb-4">
             <label class="block font-bold mb-2">Ẩn danh mục</label>
-            <select name="hide" class="w-full border-gray-300 rounded-lg px-4 py-2">
+            <select name="hide" class="w-full border border-gray-400 rounded-lg px-4 py-2">
                 <option value="0" {{ $category->hide == 0 ? 'selected' : '' }}>Hiển thị</option>
                 <option value="1" {{ $category->hide == 1 ? 'selected' : '' }}>Ẩn</option>
             </select>

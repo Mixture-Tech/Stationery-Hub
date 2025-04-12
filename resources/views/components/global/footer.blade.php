@@ -4,7 +4,7 @@
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-8 py-14 w-4/5 max-w-xs mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-full">
                 <div class="col-span-full mb-10 lg:col-span-2 lg:mb-0 border-r border-soft-gray">
                     <a href="https://pagedone.io/"  class="flex justify-center lg:justify-start">
-                    <img src="{{ Vite::asset('resources/images/logo/MIXTURE-TECH.png') }}" alt="Market Logo" class="h-10 w-48">
+                    <img src="{{ Vite::asset('resources/images/logo/logo.jpg') }}" alt="Market Logo" class="h-10 w-48">
                     </a>
                     <p class="py-8 text-sm lg:max-w-xs text-center lg:text-left">Trusted in more than 100 countries & 5 million customers. Follow us on social media.</p>
                     <div class="flex mt-4 space-x-4 justify-center lg:justify-start sm:mt-0 ">

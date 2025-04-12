@@ -56,12 +56,14 @@
                                     <td class="py-3 px-4">
                                         <span class="px-2 py-1 rounded text-white text-sm
                                             @if($order->status == 'Pending') bg-yellow-600
+                                            @elseif($order->status == 'Confirmed') bg-purple-500
                                             @elseif($order->status == 'Processing') bg-blue-500
                                             @elseif($order->status == 'Shipped') bg-purple-500
                                             @elseif($order->status == 'Complete') bg-green-500
                                             @elseif($order->status == 'Cancelled') bg-red-500
                                             @endif">
                                             @if($order->status == 'Pending') Chờ xác nhận
+                                            @elseif($order->status == 'Confirmed') Xác nhận
                                             @elseif($order->status == 'Processing') Đang xử lý
                                             @elseif($order->status == 'Shipped') Đang giao
                                             @elseif($order->status == 'Complete') Đã giao
