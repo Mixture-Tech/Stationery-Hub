@@ -171,4 +171,45 @@
         let shippingFee = selectedOption ? parseFloat(selectedOption.getAttribute('data-fee') || 0) : 0;
         updateTotal(shippingFee);
     });
+    
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    // Lấy dữ liệu form
+    let name = document.getElementById('name').value.trim();
+    let email = document.getElementById('email').value.trim();
+    let phone = document.getElementById('phone').value.trim();
+    let province = document.getElementById('province').value;
+    let district = document.getElementById('district').value;
+    let address = document.getElementById('address').value.trim();
+    let paymentMethod = document.querySelector('input[name="payment_methods"]:checked');
+
+    // Regex kiểm tra
+    let phoneRegex = /^\d{10}$/;
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Kiểm tra từng điều kiện
+    if (!name || !email || !phone || !province || !district || !address) {
+        alert("Vui lòng điền đầy đủ tất cả thông tin!");
+        e.preventDefault();
+        return;
+    }
+
+    if (!emailRegex.test(email)) {
+        alert("Email không hợp lệ. Vui lòng kiểm tra lại!");
+        e.preventDefault();
+        return;
+    }
+
+    if (!phoneRegex.test(phone)) {
+        alert("Số điện thoại phải đúng 10 chữ số!");
+        e.preventDefault();
+        return;
+    }
+
+    if (!paymentMethod) {
+        alert("Vui lòng chọn phương thức thanh toán!");
+        e.preventDefault();
+        return;
+    }
+});
+
 </script>

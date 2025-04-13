@@ -13,6 +13,14 @@ class ProductController extends Controller
     {
         $perPage = $request->input('per_page', 24);
         $query = Product::where('hide', false)->where('nums', '>', 0);
+        $query = Product::where('hide', false)->where('nums', '>', 0)
+        ->whereHas('category', function($query) {
+            $query->where('hide', false)
+                ->whereHas('parent', function($subQuery) {
+                    $subQuery->where('hide', false);
+                });
+        });
+
         
         // Khởi tạo biến cho breadcrumb
         $breadcrumbItems = [];
@@ -104,7 +112,14 @@ class ProductController extends Controller
 
         if ($request->filled('search')) {
             $searchTerm = $request->input('search');
-            $query->where('name', 'like', '%' . $searchTerm . '%');
+            $query->where('name', 'like', '%' . $searchTerm . '%')
+                  ->where('hide', false)  // Kiểm tra sản phẩm không bị ẩn
+                  ->whereHas('category', function($q) {
+                      $q->where('hide', false) // Kiểm tra category không bị ẩn
+                        ->whereHas('parent', function($subQ) {
+                            $subQ->where('hide', false); // Kiểm tra category parent không bị ẩn
+                        });
+                  });
         }
 
         

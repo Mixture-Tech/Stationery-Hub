@@ -8,6 +8,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VnpayPaymentController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\PreventAdminFromOrdering;
 
 
 Route::get('/', function () {
@@ -28,7 +29,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'detail'])->name('products.detail');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', PreventAdminFromOrdering::class])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::get('/cart/remove/{cart_id}', [CartController::class, 'remove'])->name('cart.remove');
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', PreventAdminFromOrdering::class])->group(function () {
     // Routes cho PaymentController
     Route::post('/payment/direct', [PaymentController::class, 'directPayment'])->name('payment.direct');
     Route::post('/payment/cart', [PaymentController::class, 'cartPayment'])->name('payment.cart');
@@ -52,7 +53,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Routes cho đơn hàng
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', PreventAdminFromOrdering::class])->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}', [OrderController::class, 'detail'])->name('orders.detail');
     Route::patch('/orders/{id}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');

@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(EnsureUserIsAdmin::class)->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/products', [AdminController::class, 'getProducts'])->name('admin.products');
     Route::get('/categories', [AdminController::class, 'getCategories'])->name('admin.categories');

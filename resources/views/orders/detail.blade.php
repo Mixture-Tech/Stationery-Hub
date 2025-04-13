@@ -71,11 +71,11 @@
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Số điện thoại:</span>
-                            <span>{{ $order->user->phone ?? 'Không có' }}</span>
+                            <span>{{ $order->phone ?? 'Không có' }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Địa chỉ:</span>
-                            <span>{{ $order->area->name_area ?? '' }}, {{ $order->district->name_district ?? '' }}, {{ $order->province->name_province ?? '' }}</span>
+                            <span>{{ $order->address ?? '' }}, {{ $order->district->name ?? '' }}, {{ $order->province->name ?? '' }}</span>
                         </div>
                     </div>
                 </div>
@@ -163,9 +163,10 @@
                 <h2 class="font-semibold text-lg mb-3">Trạng thái đơn hàng</h2>
                 <div class="relative">
                     <div class="flex items-center justify-between w-full">
+                        <!-- Chờ xác nhận -->
                         <div class="flex flex-col items-center">
-                            <div class="w-8 h-8 {{ in_array($order->status, ['Pending','Confirmed', 'Shipped', 'Complete']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
-                                @if(in_array($order->status, ['Pending','Confirmed', 'Shipped', 'Complete']))
+                            <div class="w-8 h-8 {{ in_array($order->status, ['Pending', 'Confirmed', 'Shipped', 'Complete']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center z-10">
+                                @if(in_array($order->status, ['Pending', 'Confirmed', 'Shipped', 'Complete']))
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
@@ -173,9 +174,10 @@
                             </div>
                             <span class="text-xs mt-1">Chờ xác nhận</span>
                         </div>
-                        
+
+                        <!-- Xác nhận -->
                         <div class="flex flex-col items-center">
-                            <div class="w-8 h-8 {{ in_array($order->status, ['Confirmed', 'Shipped', 'Complete']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
+                            <div class="w-8 h-8 {{ in_array($order->status, ['Confirmed', 'Shipped', 'Complete']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center z-10">
                                 @if(in_array($order->status, ['Confirmed', 'Shipped', 'Complete']))
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -184,9 +186,10 @@
                             </div>
                             <span class="text-xs mt-1">Xác nhận</span>
                         </div>
-                        
+
+                        <!-- Vận chuyển -->
                         <div class="flex flex-col items-center">
-                            <div class="w-8 h-8 {{ in_array($order->status, ['Shipped', 'Complete']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
+                            <div class="w-8 h-8 {{ in_array($order->status, ['Shipped', 'Complete']) ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center z-10">
                                 @if(in_array($order->status, ['Shipped', 'Complete']))
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -195,9 +198,10 @@
                             </div>
                             <span class="text-xs mt-1">Vận chuyển</span>
                         </div>
-                        
+
+                        <!-- Hoàn thành -->
                         <div class="flex flex-col items-center">
-                            <div class="w-8 h-8 {{ $order->status == 'Complete' ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center">
+                            <div class="w-8 h-8 {{ $order->status == 'Complete' ? 'bg-green-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center z-10">
                                 @if($order->status == 'Complete')
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -207,20 +211,23 @@
                             <span class="text-xs mt-1">Hoàn thành</span>
                         </div>
                     </div>
-                    
+
                     <!-- Line connecting dots -->
-                    <div class="absolute top-4 left-0 w-full h-0.5 bg-gray-200 -z-10">
-                        <div class="h-full bg-green-500" style="width: 
-                            @if($order->status == 'Pending') 0%
-                            @elseif($order->status == 'Confirmed') 33%
-                            @elseif($order->status == 'Shipped') 67%
-                            @elseif($order->status == 'Complete') 100%
-                            @else 0%
-                            @endif
-                        "></div>
+                    <div class="absolute top-4 w-full h-0.5 -z-0">
+                        <!-- Connecting lines between dots -->
+                        <div class="flex justify-between w-full px-8">
+                            <!-- Line between Pending and Confirmed -->
+                            <div class="w-1/3 h-0.5 {{ in_array($order->status, ['Confirmed', 'Shipped', 'Complete']) ? 'bg-green-500' : 'bg-transparent' }}"></div>
+
+                            <!-- Line between Confirmed and Shipped -->
+                            <div class="w-1/3 h-0.5 {{ in_array($order->status, ['Shipped', 'Complete']) ? 'bg-green-500' : 'bg-transparent' }}"></div>
+
+                            <!-- Line between Shipped and Complete -->
+                            <div class="w-1/3 h-0.5 {{ $order->status == 'Complete' ? 'bg-green-500' : 'bg-transparent' }}"></div>
+                        </div>
                     </div>
                 </div>
-                
+
                 @if($order->status == 'Cancelled')
                 <div class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
                     <p class="font-medium">Đơn hàng đã bị hủy</p>

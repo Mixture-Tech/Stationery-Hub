@@ -20,6 +20,8 @@ return new class extends Migration
             $table->decimal('total_price', 10, 2);
             $table->string('status')->default('pending');
             $table->string('payment_methods');
+            $table->string('phone')->nullable(); 
+            $table->string('address')->nullable();
             $table->boolean('hide')->default(false);
             $table->timestamps();
 

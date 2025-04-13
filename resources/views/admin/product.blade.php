@@ -66,18 +66,18 @@
                                 <td class="border border-gray-300 px-4 py-2 text-center">{{ $product->brand ?? 'Không có thương hiệu' }}</td>
                                 <td class="border border-gray-300 px-4 py-2 text-center">{{ $product->discount ?? 0 }}%</td>
                                 <td class="border border-gray-300 px-4 py-2 text-center">
-    @if($product->image)
-        <!-- Kiểm tra xem file có tồn tại trong storage không -->
-        @if(file_exists(public_path('storage/' . $product->image)))
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
-        @else
-            <!-- Nếu không tồn tại, dùng đường dẫn tuyệt đối từ dữ liệu -->
-            <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
-        @endif
-    @else
-        Không có ảnh
-    @endif
-</td>
+                                    @if($product->image)
+                                        <!-- Kiểm tra xem file có tồn tại trong storage không -->
+                                        @if(file_exists(public_path('storage/' . $product->image)))
+                                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
+                                        @else
+                                            <!-- Nếu không tồn tại, dùng đường dẫn tuyệt đối từ dữ liệu -->
+                                            <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
+                                        @endif
+                                    @else
+                                        Không có ảnh
+                                    @endif
+                                </td>
                                 <td class="border bordor-gray-300 py-3 px-4 text-center">
                                     @if($product->hide == 0)
                                         <span class="text-green-600 font-semibold">Hiển thị</span>

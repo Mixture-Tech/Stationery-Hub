@@ -106,7 +106,7 @@ class PaymentController extends Controller
         // Validate dữ liệu từ form
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
+            'phone' => ['required', 'regex:/^\d{10}$/'],
             'email' => 'required|email|max:255',
             'id_province' => 'required|exists:provinces,id_province',
             'id_district' => 'required|exists:districts,id_district',
@@ -173,6 +173,8 @@ class PaymentController extends Controller
             'total_price' => $total,
             'status' => 'Pending',
             'payment_methods' => $request->payment_methods,
+            'phone' => $request->phone,   
+            'address' => $request->address,
         ]);
 
         // Lưu chi tiết đơn hàng

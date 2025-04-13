@@ -8,13 +8,13 @@
       <div class="ml-6 flex flex-1 gap-x-3">
         <div class="relative group">
             <div onclick="window.location.href='{{ route('dashboard') }}'" class="flex cursor-pointer select-none items-center gap-x-2 rounded-md py-2 px-4 hover:bg-medium-blue text-soft-gray">
-                <x-icon name="menu-grid" class="h-5 w-5" />
-            </div>
+          <x-icon name="menu-grid" class="h-5 w-5" />
         </div>
-    
+        </div>
+
         <div class="relative w-full">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <x-icon name="search" class="h-5 w-5" />
+            <x-icon name="search" class="h-5 w-5" />
           </div>
           <input 
               type="text" 
@@ -24,8 +24,8 @@
               value="{{ request('search') }}" 
               onkeydown="if(event.key === 'Enter') window.location.href='{{ route('products.index') }}?search=' + encodeURIComponent(this.value)"
           />
+        </div>
       </div>
-    </div>
 
       <div class="ml-2 flex">
         <div onclick="window.location.href='{{ route('orders.index') }}'" class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-medium-blue text-soft-gray">
@@ -33,16 +33,14 @@
           <span class="text-sm font-medium">Đơn hàng</span>
         </div>
 
-        <a  href="{{ route('cart.index') }}" 
-          class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-medium-blue text-soft-gray">
-            <div class="relative">
-                <x-icon name="cart" class="h-5 w-5 text-soft-gray" />
-                <span class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-soft-gray">
-                    {{ App\Http\Controllers\CartController::cartItemCount() }}
-                </span>
-            </div>
-            <span class="text-sm font-medium text-soft-gray">Giỏ hàng</span>
-          </a>
+        <div class="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-medium-blue text-soft-gray">
+          <div class="relative">
+              <x-icon name="cart" class="h-5 w-5 text-soft-gray" />
+              <span class="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-soft-gray">
+                  {{ App\Http\Controllers\CartController::cartItemCount() }}
+              </span>
+          </div>
+          <a href="{{ route('cart.index') }}" class="text-sm font-medium text-soft-gray">Giỏ hàng</a>
       </div>
 
         <div class="relative ml-2">
