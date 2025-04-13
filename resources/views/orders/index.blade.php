@@ -33,7 +33,7 @@
                         <tbody>
                             @foreach($orders as $order)
                                 <tr class="border-b hover:bg-gray-50">
-                                    <td class="py-3 px-4">{{ $order->created_at->format('d/m/Y H:i') }}</td>
+                                    <td class="py-3 px-4">{{ $order->created_at->format('d/m/Y') }}</td>
                                     <td class="py-3 px-4">{{ $order->created_at->format('H:i') }}</td>
                                     <td class="py-3 px-4">
                                     @if($order->payment_methods == 'momo')

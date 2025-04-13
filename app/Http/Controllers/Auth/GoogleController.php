@@ -29,8 +29,8 @@ class GoogleController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'google_id' => $user->id,
-                    'password' => bcrypt('123456dummy'),
-                    'id_role' => 2 // Thêm id_role mặc định là 2 (user thường)
+                    'password' => bcrypt('mixturetech'),
+                    'id_role' => 3
                 ]);
 
                 Auth::login($newUser);
