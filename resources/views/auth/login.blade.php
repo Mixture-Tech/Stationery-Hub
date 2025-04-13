@@ -38,6 +38,23 @@
             </x-auth.primary-button>
         </div>
 
+        <div class="relative flex items-center justify-center mt-4">
+            <div class="absolute border-t border-gray-300 w-1/2"></div>
+            <div class="px-4 bg-white relative text-sm text-gray-500">
+                Or
+            </div>
+        </div>
+
+        <div class="flex items-center justify-center mt-4">
+            <a href="{{ route('auth.google') }}" class="inline-flex items-center px-4 py-2 bg-white border
+             border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest
+             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500
+               transition ease-in-out duration-150 hover:bg-indigo-300">
+                <img src="https://www.google.com/favicon.ico" alt="Google Logo" class="w-4 h-4 mr-2">
+                Đăng nhập bằng Google
+            </a>
+        </div>
+
         <div class="flex items-center justify-between mt-4">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
