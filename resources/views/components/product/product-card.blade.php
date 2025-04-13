@@ -40,4 +40,26 @@
             </div>
         </div>
     </a>
+    
+    <!-- Thêm 2 nút Mua ngay và Thêm vào giỏ hàng -->
+    <div class="p-3 border-t border-gray-100">
+        <div class="flex space-x-2">
+            <form action="{{ route('payment.direct') }}" method="POST" class="flex-1">
+                @csrf
+                <input type="hidden" name="id_product" value="{{ $id }}">
+                <input type="hidden" name="quantity" value="1">
+                <x-product.product-button variant="primary" type="submit" class="w-full">
+                    <i class="fas fa-bolt"></i>
+                </x-product.product-button>
+            </form>
+            <form action="{{ route('cart.add') }}" method="POST" class="flex-1">
+                @csrf
+                <input type="hidden" name="id_product" value="{{ $id }}">
+                <input type="hidden" name="quantity" value="1">
+                <x-product.product-button variant="secondary" type="submit" class="w-full">
+                    <i class="fas fa-shopping-cart"></i>
+                </x-product.product-button>
+            </form>
+        </div>
+    </div>
 </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VnpayPaymentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\PreventAdminFromOrdering;
 
@@ -60,13 +61,19 @@ Route::middleware(['auth', PreventAdminFromOrdering::class])->group(function () 
     Route::patch('/orders/{id}/hide', [OrderController::class, 'hide'])->name('orders.hide');
 });
 
-Route::get('/payment', function () {
-    return view('payment.index');
+// Google login routes
+Route::middleware('guest')->group(function () {
+    Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+    Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 });
 
-Route::get('/payment/success', function () {
-    return view('payment.success');
-});
+// Route::get('/payment', function () {
+//     return view('payment.index');
+// });
+
+// Route::get('/payment/success', function () {
+//     return view('payment.success');
+// });
 
 Route::get('/debug-session', function () {
     return session()->all();

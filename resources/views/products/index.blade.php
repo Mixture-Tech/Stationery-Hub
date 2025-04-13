@@ -3,25 +3,25 @@
 <x-app-layout>
     {{-- resources/views/components/product-section.blade.php --}}
 
-    <section class="container w-4/5 mx-auto py-6 px-4">
+    <section class="container w-5/6 mx-auto py-6 px-4">
         <div class="flex flex-col md:flex-row gap-6">
             <!-- Left sidebar - Categories and Filters -->
             <div class="w-full md:w-1/4 lg:w-1/5">
                 <!-- Product Categories -->
                 <div class="bg-white p-4 rounded shadow-sm mb-4">
                     <h2 class="font-bold text-medium-blue mb-3 uppercase">Nhóm sản phẩm</h2>
-                    <div class="pl-3 space-y-2 cursor-pointer">
-                        <div class="font-medium mb-2">
+                    <div class="pl-1 space-y-2 cursor-pointer">
+                        <div class="font-medium mb-2 rounded-e-md">
                             <a href="{{ route('products.index') }}" 
-                            class="{{ !request('category') && !request('parent_category') ? 'text-dark-blue font-bold' : '' }}">
-                                Tất cả sản phẩm
+                            class="{{ !request('category') && !request('parent_category') ? 'text-dark-blue font-bold shadow px-4 py-2' : 'px-4' }}">
+                            <i class="fas {{ !request('category') && !request('parent_category') ? 'fa-plus' : 'fa-minus' }} mr-1"></i>Tất cả sản phẩm
                             </a>
                         </div>
                         @foreach($categoryParents as $parent)
-                            <div class="font-medium">
+                            <div class="font-medium rounded-e-md ">
                                 <a href="{{ route('products.index', ['parent_category' => $parent->id_parent]) }}" 
-                                    class="{{ request('parent_category') == $parent->id_parent ? 'text-dark-blue font-bold' : '' }}">
-                                    {{ $parent->name_parent }}
+                                    class="{{ request('parent_category') == $parent->id_parent ? 'text-dark-blue font-bold shadow p-2' : '' }}">
+                                    <i class="fas {{ request('parent_category') == $parent->id_parent ? 'fa-plus' : 'fa-minus' }} mr-1"></i> {{ $parent->name_parent }}
                                 </a>
                             </div>
                             
